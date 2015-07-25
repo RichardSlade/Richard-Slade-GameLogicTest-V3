@@ -1,0 +1,40 @@
+﻿Build started 25/07/2015 23:59:14.
+     1>Project "E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include" /I"E:\libraries\SFML-2.3.1\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt src\enemyStates.cpp
+         enemyStates.cpp
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\utility.hpp(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\entity\steeringbehaviour.hpp(17): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
+                 e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\params.hpp(12) : see declaration of 'Params'
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\enemystates.cpp(121): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\enemystates.cpp(128): warning C4018: '<' : signed/unsigned mismatch
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\VS-projects\Richard_Slade-GameLogicTest_v3\Debug\Richard_Slade-GameLogicTest_v3.exe" /INCREMENTAL /NOLOGO /LIBPATH:"E:\libraries\SFML-2.3.1\lib" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\VS-projects\Richard_Slade-GameLogicTest_v3\Debug\Richard_Slade-GameLogicTest_v3.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\VS-projects\Richard_Slade-GameLogicTest_v3\Debug\Richard_Slade-GameLogicTest_v3.lib" /MACHINE:X86 Debug\adventurer.obj
+         Debug\controller.obj
+         Debug\enemy.obj
+         Debug\enemyStates.obj
+         Debug\entity.obj
+         Debug\gameCompleteScreen.obj
+         Debug\gameState.obj
+         Debug\hud.obj
+         Debug\level.obj
+         Debug\levelBlock.obj
+         Debug\levelCompleteScreen.obj
+         Debug\main.obj
+         Debug\menuState.obj
+         Debug\path.obj
+         Debug\pausedScreen.obj
+         Debug\quadTree.obj
+         Debug\sceneNode.obj
+         Debug\scenery.obj
+         Debug\spriteNode.obj
+         Debug\steeringBehaviour.obj
+         Debug\utility.obj
+         Debug\wall.obj
+         Debug\world.obj
+         Richard_Slade-GameLogicTest_v3.vcxproj -> E:\VS-projects\Richard_Slade-GameLogicTest_v3\Debug\Richard_Slade-GameLogicTest_v3.exe
+     1>Done Building Project "E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.44

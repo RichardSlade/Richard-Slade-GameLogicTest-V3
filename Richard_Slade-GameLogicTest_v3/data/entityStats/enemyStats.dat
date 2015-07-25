@@ -1,0 +1,7 @@
+Mass 1.0
+WalkSpeed 1.0
+RunSpeed 2.0
+MaxForce 20.0
+MaxTurnRate 2.0
+Lives 0.0
+AggroDistance 200.0

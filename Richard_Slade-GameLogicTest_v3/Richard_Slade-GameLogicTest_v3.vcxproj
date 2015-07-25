@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\App\AppState.hpp" />
+    <ClInclude Include="include\App\Controller.hpp" />
+    <ClInclude Include="include\App\GameCompleteScreen.hpp" />
+    <ClInclude Include="include\App\GameState.hpp" />
+    <ClInclude Include="include\App\HUD.hpp" />
+    <ClInclude Include="include\App\LevelCompleteScreen.hpp" />
+    <ClInclude Include="include\App\MenuState.hpp" />
+    <ClInclude Include="include\App\Params.hpp" />
+    <ClInclude Include="include\App\PausedScreen.hpp" />
+    <ClInclude Include="include\App\Utility.hpp" />
+    <ClInclude Include="include\Entity\Adventurer.hpp" />
+    <ClInclude Include="include\Entity\Attribute\Killable.hpp" />
+    <ClInclude Include="include\Entity\Enemy.hpp" />
+    <ClInclude Include="include\Entity\Entity.hpp" />
+    <ClInclude Include="include\Entity\EntityStats.hpp" />
+    <ClInclude Include="include\Entity\Path.hpp" />
+    <ClInclude Include="include\Entity\State\EnemyStates.hpp" />
+    <ClInclude Include="include\Entity\State\State.hpp" />
+    <ClInclude Include="include\Entity\State\StateMachine.hpp" />
+    <ClInclude Include="include\Entity\SteeringBehaviour.hpp" />
+    <ClInclude Include="include\SceneNode\SceneNode.hpp" />
+    <ClInclude Include="include\SceneNode\SpriteNode.hpp" />
+    <ClInclude Include="include\World\Level.hpp" />
+    <ClInclude Include="include\World\LevelBlock.hpp" />
+    <ClInclude Include="include\World\QuadTree.hpp" />
+    <ClInclude Include="include\World\Scenery.hpp" />
+    <ClInclude Include="include\World\WallBlock.hpp" />
+    <ClInclude Include="include\World\World.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\adventurer.cpp" />
+    <ClCompile Include="src\controller.cpp" />
+    <ClCompile Include="src\enemy.cpp" />
+    <ClCompile Include="src\enemyStates.cpp" />
+    <ClCompile Include="src\entity.cpp" />
+    <ClCompile Include="src\gameCompleteScreen.cpp" />
+    <ClCompile Include="src\gameState.cpp" />
+    <ClCompile Include="src\hud.cpp" />
+    <ClCompile Include="src\level.cpp" />
+    <ClCompile Include="src\levelBlock.cpp" />
+    <ClCompile Include="src\levelCompleteScreen.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\menuState.cpp" />
+    <ClCompile Include="src\path.cpp" />
+    <ClCompile Include="src\pausedScreen.cpp" />
+    <ClCompile Include="src\quadTree.cpp" />
+    <ClCompile Include="src\sceneNode.cpp" />
+    <ClCompile Include="src\scenery.cpp" />
+    <ClCompile Include="src\spriteNode.cpp" />
+    <ClCompile Include="src\steeringBehaviour.cpp" />
+    <ClCompile Include="src\utility.cpp" />
+    <ClCompile Include="src\wall.cpp" />
+    <ClCompile Include="src\world.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{8A632A96-70D2-4B86-ADFB-347BF1C1A0B5}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Richard_SladeGameLogicTest_v3</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include;E:\libraries\SFML-2.3.1\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>E:\libraries\SFML-2.3.1\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include;E:\libraries\SFML-2.3.1\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>E:\libraries\SFML-2.3.1\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
