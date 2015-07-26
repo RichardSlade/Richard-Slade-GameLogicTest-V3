@@ -15,8 +15,6 @@ HUD::HUD(World* world
 
   for (size_t i = 0; i < HUD::DataType::NumDataType; i++)
     mHUDText.push_back(sf::Text("", font));
-
-  mHUDText.at(HUD::DataType::Name).setString(username);
 }
 
 void HUD::draw(sf::RenderTarget& target
@@ -24,23 +22,23 @@ void HUD::draw(sf::RenderTarget& target
 {
   target.draw(mHUDBackground);
 
-  target.draw(mHUDText.at(HUD::DataType::Name));
+  target.draw(mHUDText.at(HUD::DataType::Level));
   target.draw(mHUDText.at(HUD::DataType::Enemy));
   target.draw(mHUDText.at(HUD::DataType::Lives));
   target.draw(mHUDText.at(HUD::DataType::Score));
 }
 
-void HUD::update(int enemyNum,
-  int playerLives,
-  int score)
+void HUD::update(int level,
+                int enemyNum,
+                int playerLives,
+                int score)
 {
+  mHUDText.at(HUD::DataType::Level).setString("Level: " + std::to_string(level));
   mHUDText.at(HUD::DataType::Enemy).setString("Enemies: " + std::to_string(enemyNum));
 
-  mHUDText.at(HUD::DataType::Lives).setString("Lives: "
-    + std::to_string(playerLives));
+  mHUDText.at(HUD::DataType::Lives).setString("Lives: " + std::to_string(playerLives));
 
-  mHUDText.at(HUD::DataType::Score).setString("Score: "
-    + std::to_string(score));
+  mHUDText.at(HUD::DataType::Score).setString("Score: " + std::to_string(score));
 
   for (sf::Text& txt : mHUDText)
   {
@@ -54,7 +52,7 @@ void HUD::setHUDPosition(sf::FloatRect viewBounds)
   mHUDBackground.setPosition(viewBounds.left
     , viewBounds.top);
 
-  mHUDText.at(HUD::DataType::Name).setPosition(viewBounds.left + (viewBounds.width / 8.f)
+  mHUDText.at(HUD::DataType::Level).setPosition(viewBounds.left + (viewBounds.width / 8.f)
     , viewBounds.top + 10.f);
 
   mHUDText.at(HUD::DataType::Enemy).setPosition(viewBounds.left + (viewBounds.width / 4.f)

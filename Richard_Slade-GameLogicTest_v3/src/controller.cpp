@@ -183,7 +183,7 @@ void Controller::run()
     sf::View view = mWindow.getView();
     mStatisticsText.setPosition(view.getCenter().x - (view.getSize().x / 2),
       view.getCenter().y - (view.getSize().y / 2));
-    mWindow.draw(mStatisticsText);
+    //mWindow.draw(mStatisticsText);
 
     mWindow.display();
 

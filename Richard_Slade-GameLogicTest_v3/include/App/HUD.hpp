@@ -14,7 +14,7 @@ class HUD : public sf::Drawable
 public:
   enum DataType
   {
-    Name,
+    Level,
     Enemy,
     Lives,
     Score,
@@ -27,7 +27,7 @@ private:
   std::vector<sf::Text>                   mHUDText;
 
   virtual void                            draw(sf::RenderTarget&
-    , sf::RenderStates) const;
+                                                , sf::RenderStates) const;
 
 public:
   HUD(World*
@@ -43,9 +43,10 @@ public:
 
   virtual                                 ~HUD(){};
 
-  void                                    update(int enemyNum,
-    int playerLives,
-    int score);
+  void                                    update(int level,
+                                                  int enemyNum,
+                                                  int playerLives,
+                                                  int score);
 
   // Setters
   void                                    setHUDPosition(sf::FloatRect);

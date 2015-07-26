@@ -17,63 +17,63 @@
 #include "SceneNode/SpriteNode.hpp"
 
 World::World(GameState& gameState
-             , const Controller& controller
-             , sf::RenderWindow& window
-             , std::string username
-             , int worldDim
-             , int numEnemy)
-: mViewSize(640, 480)
-, mWorldBounds(sf::Vector2f(0, 0),
-               sf::Vector2f(worldDim, worldDim))
-, mLevelBlockX(controller.getParams().LevelBlockX)
-, mLevelBlockY(controller.getParams().LevelBlockY)
-, mLevelBlockSize(controller.getParams().LevelBlockSize)
-, mSpacing(4)
-, mWaypointRadius(controller.getParams().WaypointRadius)
-, mScrollSpeed(controller.getParams().ScrollSpeed)
-, mGameState(gameState)
-, mWindow(window)
-, mWorldView(mWindow.getDefaultView())
-, mFocusPoint(0.f, 0.f)
-, mHUD(this
-       , controller.getFont(Controller::Fonts::Sansation)
-       , getViewBounds()
-       , username)
-, mCurrentAdventurer(nullptr)
-, mCurrentAdventurerIndex(0)
+  , const Controller& controller
+  , sf::RenderWindow& window
+  , std::string username
+  , int worldDim
+  , int numEnemy)
+  : mViewSize(640, 480)
+  , mWorldBounds(sf::Vector2f(0, 0),
+                 sf::Vector2f(worldDim, worldDim))
+  , mLevelBlockX(controller.getParams().LevelBlockX)
+  , mLevelBlockY(controller.getParams().LevelBlockY)
+  , mLevelBlockSize(controller.getParams().LevelBlockSize)
+  , mSpacing(4)
+  , mWaypointRadius(controller.getParams().WaypointRadius)
+  , mScrollSpeed(controller.getParams().ScrollSpeed)
+  , mGameState(gameState)
+  , mWindow(window)
+  , mWorldView(mWindow.getDefaultView())
+  , mFocusPoint(0.f, 0.f)
+  , mHUD(this
+  , controller.getFont(Controller::Fonts::Sansation)
+  , getViewBounds()
+  , username)
+  , mCurrentAdventurer(nullptr)
+  , mCurrentAdventurerIndex(0)
 {
-    initialiseStatesAndStats();
-    buildScene(controller);
+  initialiseStatesAndStats();
+  buildScene(controller);
 }
 
 void World::initialiseStatesAndStats()
 {
-    // Initialise enemy states
-    mEnemyStates.push_back(std::unique_ptr<EnemyStates::LookOut>(new EnemyStates::LookOut));
-    mEnemyStates.push_back(std::unique_ptr<EnemyStates::Relax>(new EnemyStates::Relax));
-    mEnemyStates.push_back(std::unique_ptr<EnemyStates::Attack>(new EnemyStates::Attack));
+  // Initialise enemy states
+  mEnemyStates.push_back(std::unique_ptr<EnemyStates::LookOut>(new EnemyStates::LookOut));
+  mEnemyStates.push_back(std::unique_ptr<EnemyStates::Relax>(new EnemyStates::Relax));
+  mEnemyStates.push_back(std::unique_ptr<EnemyStates::Attack>(new EnemyStates::Attack));
 
-    mEntityStats.push_back(EntityStats("data/entityStats/enemyStats.dat"));
-    mEntityStats.push_back(EntityStats("data/entityStats/adventurerStats.dat"));
+  mEntityStats.push_back(EntityStats("data/entityStats/enemyStats.dat"));
+  mEntityStats.push_back(EntityStats("data/entityStats/adventurerStats.dat"));
 }
 
 void World::buildScene(const Controller& controller)
 {
-    // Initialize the different scene graph layers
-	for(std::size_t i = 0; i < SceneNode::Layers::Num; i++)
-	{
-		SceneNode::upScNode layer(new SceneNode());
-		mSceneLayers.at(i) = layer.get();
+  // Initialize the different scene graph layers
+  for (std::size_t i = 0; i < SceneNode::Layers::Num; i++)
+  {
+    SceneNode::upScNode layer(new SceneNode());
+    mSceneLayers.at(i) = layer.get();
 
-		mSceneGraph.addChild(std::move(layer));
-	}
+    mSceneGraph.addChild(std::move(layer));
+  }
 
-   sf::IntRect backgroundSpriteBounds = sf::IntRect(sf::Vector2i(0, 0),
-                                                    sf::Vector2i((mLevelBlockSize) * mLevelBlockX,
-                                                                 (mLevelBlockSize) * mLevelBlockX));
+  sf::IntRect backgroundSpriteBounds = sf::IntRect(sf::Vector2i(0, 0),
+    sf::Vector2i((mLevelBlockSize)* mLevelBlockX,
+    (mLevelBlockSize)* mLevelBlockX));
 
-    std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(controller.getTexture(Controller::Textures::Brick),
-                                                                backgroundSpriteBounds));
+  std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(controller.getTexture(Controller::Textures::Brick),
+    backgroundSpriteBounds));
 
   mSceneLayers.at(SceneNode::Layers::Background)->addChild(std::move(backgroundSprite));
 
@@ -82,13 +82,13 @@ void World::buildScene(const Controller& controller)
 
   sf::Vector2f pos(mLevelBlockSize / 2, mLevelBlockSize / 2);
 
-  for(unsigned int row =  0; row < mLevelBlockY; row++)
+  for (unsigned int row = 0; row < mLevelBlockY; row++)
   {
     mObstacles.push_back(std::vector<Scenery*>());
 
     if (row % 4 == 0)
     {
-      for (unsigned int col = 0; col < mLevelBlockX; col ++)
+      for (unsigned int col = 0; col < mLevelBlockX; col++)
       {
         if (col % 4 == 0)
         {
@@ -100,7 +100,7 @@ void World::buildScene(const Controller& controller)
           mObstacles.at(row).push_back(trap.get());
           mSceneLayers.at(SceneNode::Layers::Foreground)->addChild(std::move(trap));
 
-          
+
         }
         else
         {
@@ -112,8 +112,8 @@ void World::buildScene(const Controller& controller)
     }
     else
     {
-      for (unsigned int col = 0; col < mLevelBlockX; col ++)
-      { 
+      for (unsigned int col = 0; col < mLevelBlockX; col++)
+      {
         mObstacles.at(row).push_back(nullptr);
       }
     }
@@ -130,32 +130,29 @@ void World::generateAgents(const Controller& controller)
 {
   sf::Vector2f pos;
 
-    // Initialise characters and add to scene graph
-   for(int i = 0; i < 1; i++)
-   {
-      pos = sf::Vector2f(mLevelBlockSize * 2, mLevelBlockSize * 2);
+  // Initialise characters and add to scene graph
+  for (int i = 0; i < 1; i++)
+  {
+    pos = sf::Vector2f(mLevelBlockSize * 2, mLevelBlockSize * 2);
 
-      std::unique_ptr<Adventurer> adventurerNode(new Adventurer(mWindow
-                                                               //, mQuadTree.get()
-                                                               //, mLevel.get()
-                                                               , this
-                                                               , controller.getTexture(Controller::Textures::Adventurer)
-                                                               , controller.getFont(Controller::Fonts::Sansation)
-                                                               , pos
-                                                               , mEntityStats.at(World::Stats::AdventurerStats)
-                                                               , controller.getParams()));
+    std::unique_ptr<Adventurer> adventurerNode(new Adventurer(mWindow, this
+      , controller.getTexture(Controller::Textures::Adventurer)
+      , controller.getFont(Controller::Fonts::Sansation)
+      , pos
+      , mEntityStats.at(World::Stats::AdventurerStats)
+      , controller.getParams()));
 
 
-   // Save pointer to character for enemy initialisation
-      mAdventurers.push_back(adventurerNode.get());
+    // Save pointer to character for enemy initialisation
+    mAdventurers.push_back(adventurerNode.get());
 
-      mSceneLayers.at(SceneNode::Layers::Foreground)->addChild(std::move(adventurerNode));
-   }
+    mSceneLayers.at(SceneNode::Layers::Foreground)->addChild(std::move(adventurerNode));
+  }
 
-    mCurrentAdventurer = mAdventurers.at(0);
+  mCurrentAdventurer = mAdventurers.at(0);
 
-    sf::Vector2f startPos(mLevelBlockSize * ((mLevelBlockX / 2) - 2), mLevelBlockSize * ((mLevelBlockY / 2) - 4));
-    pos = startPos;
+  sf::Vector2f startPos(mLevelBlockSize * ((mLevelBlockX / 2) - 2), mLevelBlockSize * ((mLevelBlockY / 2) - 4));
+  pos = startPos;
 
   // Initialise Enemies
   for (unsigned int row = 0; row < 4; row++)
@@ -163,15 +160,15 @@ void World::generateAgents(const Controller& controller)
     for (unsigned int col = 0; col < 2; col++)
     {
       std::unique_ptr<Enemy> enemyNode(new Enemy(this
-                                                , controller.getTexture(Controller::Textures::Enemy)
-                                                , controller.getFont(Controller::Fonts::Sansation)
-                                                , pos
-                                                , mEntityStats.at(World::Stats::EnemyStats)
-                                                , controller.getParams()
-                                                , mEnemyStates.at(Enemy::States::LookOut).get()
-                                                , mEnemyStates.at(Enemy::States::Relax).get()
-                                                , mEnemyStates
-                                                , Enemy::States::Relax));
+        , controller.getTexture(Controller::Textures::Enemy)
+        , controller.getFont(Controller::Fonts::Sansation)
+        , pos
+        , mEntityStats.at(World::Stats::EnemyStats)
+        , controller.getParams()
+        , mEnemyStates.at(Enemy::States::LookOut).get()
+        , mEnemyStates.at(Enemy::States::Relax).get()
+        , mEnemyStates
+        , Enemy::States::Relax));
 
       enemyNode->setCurrentTarget(mAdventurers.at(0));
       mSceneLayers.at(SceneNode::Layers::Foreground)->addChild(std::move(enemyNode));
@@ -189,28 +186,6 @@ void World::handleRealTimeInput()
 
 }
 
-//void World::adjustView()
-//{
-//   sf::View view = mWindow.getView();
-//   view.setCenter(mFocusPoint);
-//
-//   sf::FloatRect bckgrndBounds = mBackground->getGlobalBounds();
-//
-//   sf::Vector2f center = view.getCenter();
-//   sf::Vector2f dim = view.getSize();
-//   dim /= 2.f;
-//
-//   if(center.x - dim.x < bckgrndBounds.left)
-//      mFocusPoint.x += mScrollSpeed;
-//   else if(center.x + dim.x > bckgrndBounds.left + bckgrndBounds.width)
-//      mFocusPoint.x -= mScrollSpeed;
-//
-//   if(center.y - dim.y < bckgrndBounds.top)
-//      mFocusPoint.y += mScrollSpeed;
-//   else if(center.y + dim.y > bckgrndBounds.top + bckgrndBounds.height)
-//      mFocusPoint.y -= mScrollSpeed;
-//}
-
 void World::update(sf::Time dt)
 {
   if (mCurrentAdventurer->isDead())
@@ -219,103 +194,97 @@ void World::update(sf::Time dt)
   mSceneGraph.removeDeletedNodes();
   mSceneGraph.update(dt);
 
-  mHUD.update(mGameState.getNumEnemy(),
+  mHUD.update(mGameState.getLevel(),
+              mGameState.getNumEnemy(),
               mCurrentAdventurer->getLives(),
-              mGameState.getTotalEnemiesTrapped() * 100);
+              mGameState.getScore());
 
   // game ending scenarios
-  if(mGameState.getNumEnemy() <= 0)
+  if (mGameState.getNumEnemy() <= 0)
   {
     mGameState.levelComplete();
   }
-  else if (mCurrentAdventurer->getLives() < 0)
+  else if(mCurrentAdventurer->getLives() <= 0)
   {
-    mGameState.gameComplete(mGameState.getTotalEnemiesTrapped());
+    mGameState.gameOver();
   }
 }
 
 void World::handleInput()
 {
-    sf::Event event;
+  sf::Event event;
 
-    while(mWindow.pollEvent(event))
+  while (mWindow.pollEvent(event))
+  {
+    if (event.type == sf::Event::Closed)
+      mWindow.close();
+    else if (event.type == sf::Event::KeyReleased)
     {
-        if(event.type == sf::Event::Closed)
-            mWindow.close();
-        else if(event.type == sf::Event::KeyReleased)
-        {
-          if (event.key.code == sf::Keyboard::Escape)
-            mGameState.pause();
-        }
-        else if(event.type == sf::Event::MouseButtonPressed)
-        {
-            sf::Vector2i mousePos;
-            sf::FloatRect vBounds = getViewBounds();
-
-            mousePos.x = sf::Mouse::getPosition(mWindow).x + vBounds.left;
-            mousePos.y = sf::Mouse::getPosition(mWindow).y + vBounds.top;
-
-            sf::Vector2f mousePosF(mousePos.x, mousePos.y);
-
-            if(event.mouseButton.button == sf::Mouse::Left)
-            {
-                mousePosF.x = std::min(mousePosF.x, mWorldBounds.width);
-                mousePosF.x = std::max(mousePosF.x, 0.f);
-
-                mousePosF.y = std::min(mousePosF.y, mWorldBounds.height);
-                mousePosF.y = std::max(mousePosF.y, 0.f);
-
-                bool collisionWithTrap = false;
-
-                for (int i = 0; i < mObstacles.size(); i++)
-                {
-                  for (int j = 0; j < mObstacles.at(0).size(); j++)
-                  {
-                    float mag = magVec(mousePosF - mObstacles.at(i).at(j)->getWorldPosition());
-
-                    if (mag < 40.f)
-                    {
-                      collisionWithTrap = true;
-                      break;
-                    }
-                  }
-                }
-
-                if(mCurrentAdventurer
-                  && !collisionWithTrap)
-                    mCurrentAdventurer->startNewPath(mousePosF);
-                
-            }
-        }
+      if (event.key.code == sf::Keyboard::Escape)
+        mGameState.pause();
     }
+    else if (event.type == sf::Event::MouseButtonPressed)
+    {
+      sf::Vector2i mousePos;
+      sf::FloatRect vBounds = getViewBounds();
 
-    handleRealTimeInput();
+      mousePos.x = sf::Mouse::getPosition(mWindow).x + vBounds.left;
+      mousePos.y = sf::Mouse::getPosition(mWindow).y + vBounds.top;
+
+      sf::Vector2f mousePosF(mousePos.x, mousePos.y);
+
+      if (event.mouseButton.button == sf::Mouse::Left)
+      {
+        mousePosF.x = std::min(mousePosF.x, mWorldBounds.width);
+        mousePosF.x = std::max(mousePosF.x, 0.f);
+
+        mousePosF.y = std::min(mousePosF.y, mWorldBounds.height);
+        mousePosF.y = std::max(mousePosF.y, 0.f);
+
+        bool collisionWithTrap = false;
+
+        for (int i = 0; i < mObstacles.size(); i++)
+        {
+          for (int j = 0; j < mObstacles.at(0).size(); j++)
+          {
+            float mag = magVec(mousePosF - mObstacles.at(i).at(j)->getWorldPosition());
+
+            if (mag < 20.f)
+            {
+              collisionWithTrap = true;
+              break;
+            }
+          }
+        }
+
+        if (mCurrentAdventurer
+          && !collisionWithTrap)
+          mCurrentAdventurer->startNewPath(mousePosF);
+
+      }
+    }
+  }
+
+  handleRealTimeInput();
 }
 
 void World::display()
 {
-   if(mCurrentAdventurer)
-      mFocusPoint = mCurrentAdventurer->getWorldPosition();
+  if (mCurrentAdventurer)
+    mFocusPoint = mCurrentAdventurer->getWorldPosition();
 
-   mWorldView.setCenter(mFocusPoint);
-   mWindow.setView(mWorldView);
+  mWorldView.setCenter(mFocusPoint);
+  mWindow.setView(mWorldView);
 
-   mWindow.draw(mSceneGraph);
+  mWindow.draw(mSceneGraph);
 
-   mHUD.setHUDPosition(getViewBounds());
-   mWindow.draw(mHUD);
-}
-
-void World::regenWorld(const Controller& controller)
-{
-  mAdventurers.clear();
-
-  generateAgents(controller);
+  mHUD.setHUDPosition(getViewBounds());
+  mWindow.draw(mHUD);
 }
 
 const sf::FloatRect World::getViewBounds() const
 {
-   return sf::FloatRect(mWorldView.getCenter() - mWorldView.getSize() / 2.f, mWorldView.getSize());
+  return sf::FloatRect(mWorldView.getCenter() - mWorldView.getSize() / 2.f, mWorldView.getSize());
 }
 
 std::vector<Scenery*> World::getObstacles(sf::Vector2f pos)
@@ -333,7 +302,7 @@ std::vector<Scenery*> World::getObstacles(sf::Vector2f pos)
       if (j < 0) j = 0;
       if (j > mLevelBlockX - 1) j = mLevelBlockX - 1;
 
-      if(mObstacles.at(i).at(j))
+      if (mObstacles.at(i).at(j))
         obstacles.push_back(mObstacles.at(i).at(j));
     }
   }
@@ -342,9 +311,9 @@ std::vector<Scenery*> World::getObstacles(sf::Vector2f pos)
   return obstacles;
 }
 
-void World::incEnemiesTrapped()
-{ 
-  mGameState.incEnemiesTrapped(); 
+void World::incScore()
+{
+  mGameState.incScore();
 }
 
 void World::decEnemies()

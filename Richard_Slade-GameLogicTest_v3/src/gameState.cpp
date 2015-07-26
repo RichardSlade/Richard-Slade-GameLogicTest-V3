@@ -9,20 +9,25 @@ GameState::GameState(Controller& cntrl
   , std::string username)
   : mResetNumEnemy(cntrl.getParams().NumEnemy)
   , mNumEnemy(mResetNumEnemy)
-  , mTotalEnemiesTrapped(0)
+  , mChangeOverTime(sf::seconds(4.f))
+  , mLostGame(false)
+  , mLevel(1)
+  , mChangeOverCountdown(sf::Time::Zero)
+  , mText(" ", cntrl.getFont(Controller::Fonts::Sansation), 32)
+  , mScore(0)
   , mController(cntrl)
   , mWindow(window)
   , mWorldDim(cntrl.getParams().LevelBlockSize * cntrl.getParams().LevelBlockX)
   , mUsername(username)
   , mWorld(new World(*this
-                      , cntrl
-                      , window
-                      , "Debug"
-                      , mWorldDim
-                      , mNumEnemy))
+            , cntrl
+            , window
+            , "Debug"
+            , mWorldDim
+            , mResetNumEnemy))
   , mPausedScreen(mController
-                  , *this
-                  , mWindow)
+  , *this
+  , mWindow)
   , mCurrentScreen(GameState::Screen::Game)
   , mNewScreen(mCurrentScreen)
   , mPaused(false)
@@ -32,42 +37,73 @@ GameState::GameState(Controller& cntrl
 
 void GameState::restartWorld()
 {
-  mWorld = std::unique_ptr<World>(new World(*this
-                                            , mController
-                                            , mWindow
-                                            , mUsername
-                                            , mWorldDim
-                                            , mResetNumEnemy));
+  std::unique_ptr<World> oldWorld(std::move(mWorld));
 
-  mNewScreen = GameState::Screen::Game;
+  mNumEnemy = mResetNumEnemy;
+  mLevel++;
+
+  mWorld = std::unique_ptr<World>(new World(*this
+    , mController
+    , mWindow
+    , ""
+    , mWorldDim
+    , mResetNumEnemy));
+}
+
+void GameState::quitGameState()
+{
+  mController.changeState();
 }
 
 void GameState::update(sf::Time dt)
 {
-  if (mNewScreen != mCurrentScreen)
-    mCurrentScreen = mNewScreen;
-
-  switch (mCurrentScreen)
+  if (mChangeOverCountdown > sf::Time::Zero)
   {
-  case GameState::Screen::Game:
+    mChangeOverCountdown -= dt;
+
+    mText.setColor(sf::Color(255, 255, 255, 255));
+    mText.setPosition(mWorld->getFocusPoint());
+
+    if (static_cast<int>(mChangeOverCountdown.asSeconds()) % 2 == 0)
+    {
+      mText.setColor(sf::Color(255, 255, 255, 0));
+    }
+
+    // If lost the game
+    if (mChangeOverCountdown < sf::Time::Zero)
+    {
+      if (mLostGame)
+        quitGameState();
+      else
+      {
+        restartWorld();
+      }
+    }
+  }
+  else
   {
-    if (!mPausedScreen.isPaused())
-      mWorld->update(dt);
-    else
-      mPausedScreen.update(dt);
+    if (mNewScreen != mCurrentScreen)
+      mCurrentScreen = mNewScreen;
 
-    break;
-  }
-  default: break;
-  }
+    switch (mCurrentScreen)
+    {
+    case GameState::Screen::Game:
+    {
+      if (!mPausedScreen.isPaused())
+        mWorld->update(dt);
+      else
+        mPausedScreen.update(dt);
 
-  //    handleInput();
+      break;
+    }
+    default: break;
+    }
+  }
 }
 
 void GameState::handleInput()
 {
-  if (mCurrentScreen == GameState::Screen::Game
-    && mWorld)
+  if (mCurrentScreen == GameState::Screen::Game)
   {
     if (!mPausedScreen.isPaused())
     {
@@ -84,7 +120,11 @@ void GameState::display()
   if (mWorld)
     mWorld->display();
 
-  if (mCurrentScreen == GameState::Screen::Game)
+  if (mChangeOverCountdown > sf::Time::Zero)
+  {
+    mWindow.draw(mText);
+  }
+  else if (mCurrentScreen == GameState::Screen::Game)
   {
     if (mPausedScreen.isPaused())
       mWindow.draw(mPausedScreen);
@@ -98,33 +138,23 @@ void GameState::pause()
 
 void GameState::levelComplete()
 {
-  quitGameState();
+  mText.setString("Level Complete\n\tScore:" + std::to_string(mScore));
+
+  sf::FloatRect bounds = mText.getLocalBounds();
+  mText.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
+  mChangeOverCountdown = mChangeOverTime;
 }
 
-void GameState::gameComplete(int sheepFromLastLevel)
+void GameState::gameOver()
 {
-  quitGameState();
-  //mNewScreen = GameState::Screen::GameComplete;
+  mText.setString("Game Over\n\tScore:" + std::to_string(mScore));
 
-  //mGameCompleteScreen.setup(mWindow.getView(), mTotalEnemiesTrapped + sheepFromLastLevel);
+  mLostGame = true;
+
+  sf::FloatRect bounds = mText.getLocalBounds();
+  mText.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
+  mChangeOverCountdown = mChangeOverTime;
 }
 
-void GameState::nextLevel()
-{
-  quitGameState();
-}
 
-void GameState::resetGame()
-{
-  //mWorldDim = mResetWorldDim;
-  //mLevelTime = sf::seconds(mResetLevelTime * 60.f);
 
-  mTotalEnemiesTrapped = 0;
-
-  restartWorld();
-}
-
-void GameState::quitGameState()
-{
-  mController.changeState();
-}

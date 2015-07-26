@@ -75,10 +75,10 @@
     <ClInclude Include="include\App\Params.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\App\PausedScreen.hpp">
+    <ClInclude Include="include\App\Utility.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\App\Utility.hpp">
+    <ClInclude Include="include\App\PausedScreen.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -5,36 +5,36 @@
 #include <World\World.hpp>
 
 Entity::Entity(World* world
-                , const sf::Texture& texture
-               , const sf::Font& font
-               , sf::Vector2f startPos
-               , EntityStats stats
-               , const Params& params
-               , Type type
-               , float scale)
-: Killable(stats.lives)
-, mWorld(world)
-, mMass(stats.mass)
-, mWalkMaxSpeed(stats.walkMaxSpeed)
-, mRunMaxSpeed(stats.runMaxSpeed)
-, mMaxForce(stats.maxForce)
-, mMaxTurnRate(stats.maxTurnRate)
-, mMaxSpeed(mWalkMaxSpeed)
-, mEntityType(type)
-, mSprite(texture)
-, mVelocity(0.f, 0.f)
-, mHeading(0.f, 0.f)
-, mSteering(this, params)
-, mCurrentTarget(nullptr)
-, mText(".....", font, 12)
-, mWanderTarget(5.f)
-, mRadius(20.f)
+  , const sf::Texture& texture
+  , const sf::Font& font
+  , sf::Vector2f startPos
+  , EntityStats stats
+  , const Params& params
+  , Type type
+  , float scale)
+  : Killable(stats.lives)
+  , mWorld(world)
+  , mMass(stats.mass)
+  , mWalkMaxSpeed(stats.walkMaxSpeed)
+  , mRunMaxSpeed(stats.runMaxSpeed)
+  , mMaxForce(stats.maxForce)
+  , mMaxTurnRate(stats.maxTurnRate)
+  , mMaxSpeed(mWalkMaxSpeed)
+  , mEntityType(type)
+  , mSprite(texture)
+  , mVelocity(0.f, 0.f)
+  , mHeading(0.f, 0.f)
+  , mSteering(this, params)
+  , mCurrentTarget(nullptr)
+  , mText(".....", font, 12)
+  , mWanderTarget(5.f)
+  , mRadius(20.f)
 {
-   mSprite.scale(scale, scale);
-   sf::FloatRect bounds = mSprite.getLocalBounds();
-   mSprite.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
+  mSprite.scale(scale, scale);
+  sf::FloatRect bounds = mSprite.getLocalBounds();
+  mSprite.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
 
-   sf::Transformable::setPosition(startPos);
+  sf::Transformable::setPosition(startPos);
 
   mWanderTarget.setFillColor(sf::Color::Magenta);
   bounds = mWanderTarget.getLocalBounds();
@@ -45,19 +45,19 @@ Entity::Entity(World* world
 
 void Entity::updateCurrent(sf::Time dt)
 {
-    //Check if entity is dead and needs to be removed
-   ensureZeroOverlap();
+  //Check if entity is dead and needs to be removed
+  ensureZeroOverlap();
 
-   float currentRotation = getRotation();
-   mHeading = sf::Vector2f(std::sin(degreeToRadian(currentRotation)), -std::cos(degreeToRadian(currentRotation)));
+  float currentRotation = getRotation();
+  mHeading = sf::Vector2f(std::sin(degreeToRadian(currentRotation)), -std::cos(degreeToRadian(currentRotation)));
 
-   sf::Color currentTextColor = mText.getColor();
-   currentTextColor.a -= 1;
-   mText.setColor(currentTextColor);
+  sf::Color currentTextColor = mText.getColor();
+  currentTextColor.a -= 1;
+  mText.setColor(currentTextColor);
 }
 
 void Entity::drawCurrent(sf::RenderTarget& target
-                        , sf::RenderStates states) const
+  , sf::RenderStates states) const
 {
   target.draw(mSprite, states);
   target.draw(mText, states);
@@ -66,24 +66,24 @@ void Entity::drawCurrent(sf::RenderTarget& target
 
 void Entity::adjustPosition()
 {
-    //sf::IntRect worldBounds = mLevel->getWorldBounds();
+  //sf::IntRect worldBounds = mLevel->getWorldBounds();
 
   sf::FloatRect worldBounds = mWorld->getWorldBounds();
-    sf::Vector2f pos = getWorldPosition();
+  sf::Vector2f pos = getWorldPosition();
 
-    pos.x = std::min(pos.x, static_cast<float>(worldBounds.width));
-    pos.x = std::max(pos.x, 0.f);
-    pos.y = std::min(pos.y, static_cast<float>(worldBounds.height));
-    pos.y = std::max(pos.y, 0.f);
+  pos.x = std::min(pos.x, static_cast<float>(worldBounds.width));
+  pos.x = std::max(pos.x, 0.f);
+  pos.y = std::min(pos.y, static_cast<float>(worldBounds.height));
+  pos.y = std::max(pos.y, 0.f);
 
-    setPosition(pos);
+  setPosition(pos);
 }
 
 void Entity::ensureZeroOverlap()
 {
-    std::list<Entity*> neighbours;
-    //getNeighbours(neighbours,
-    //              Entity::Type::AllTypes);
+  std::list<Entity*> neighbours;
+  //getNeighbours(neighbours,
+  //              Entity::Type::AllTypes);
 
   //std::list<Entity*> neighbours = mLevel->getEntitiesInRange(const_cast<Entity*>(this),
   //                                                           mRadius);
@@ -113,7 +113,7 @@ std::vector<Scenery*> Entity::getObstacles() const
 }
 
 void Entity::decEnemies()
-{ 
-  mWorld->decEnemies(); 
+{
+  mWorld->decEnemies();
 }
 

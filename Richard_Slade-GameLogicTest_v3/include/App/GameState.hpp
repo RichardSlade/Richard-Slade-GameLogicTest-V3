@@ -5,6 +5,7 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Text.hpp>
+#include <SFML/System/Time.hpp>
 
 #include "App/AppState.hpp"
 #include "App/PausedScreen.hpp"
@@ -23,9 +24,15 @@ private:
   };
 
   const int                       mResetNumEnemy;
+  const sf::Time                  mChangeOverTime;
 
+  bool                          mLostGame;
+  int                           mLevel;
+
+  sf::Time                      mChangeOverCountdown;
+  sf::Text                      mText;
   int                           mNumEnemy;
-  int                           mTotalEnemiesTrapped;
+  int                           mScore;
 
   Controller&                     mController;
   sf::RenderWindow&               mWindow;
@@ -46,6 +53,7 @@ private:
 
   void                            restartWorld();
 
+
 public:
   GameState(Controller&
     , sf::RenderWindow&
@@ -59,20 +67,17 @@ public:
 
   void                            pause();
   void                            levelComplete();
-  void                            gameComplete(int);
-
-  void                            nextLevel();
-  void                            resetGame();
-
+  void                            gameOver();
   void                            quitGameState();
 
   // Getters
   bool                            getPaused(){ return mPaused; }
-  int                    getNumEnemy(){ return mNumEnemy; }
-  int                    getTotalEnemiesTrapped() { return mTotalEnemiesTrapped; }
+  int                             getNumEnemy(){ return mNumEnemy; }
+  int                             getScore() { return mScore; }
+  int                             getLevel() { return mLevel; }
 
   // Setters
-  void                            incEnemiesTrapped(){ mTotalEnemiesTrapped++; }
+  void                            incScore(){ mScore += 100; }
   void                            decEnemies() { mNumEnemy--; }
 };
 

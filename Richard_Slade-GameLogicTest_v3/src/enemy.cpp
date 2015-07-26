@@ -7,27 +7,27 @@
 #include "Entity/Enemy.hpp"
 
 Enemy::Enemy(World* world
-, const sf::Texture& texture
-, const sf::Font& font
-, sf::Vector2f pos
-, EntityStats stats
-, const Params& params
-, State<Enemy>* globalState
-, State<Enemy>* initState
-, StateContainer& states
-, unsigned int currentState
-, float scale)
-: Entity(world
-         , texture
-         , font
-         , pos
-         , stats
-         , params
-         , Entity::Type::Enemy
-         , scale)
-, mAggroDistance(stats.aggroDistance)
-, mStates(states)
-, mStateMachine(this, globalState, initState, currentState)
+  , const sf::Texture& texture
+  , const sf::Font& font
+  , sf::Vector2f pos
+  , EntityStats stats
+  , const Params& params
+  , State<Enemy>* globalState
+  , State<Enemy>* initState
+  , StateContainer& states
+  , unsigned int currentState
+  , float scale)
+  : Entity(world
+  , texture
+  , font
+  , pos
+  , stats
+  , params
+  , Entity::Type::Enemy
+  , scale)
+  , mAggroDistance(stats.aggroDistance)
+  , mStates(states)
+  , mStateMachine(this, globalState, initState, currentState)
 {
 
 }
@@ -41,62 +41,57 @@ void Enemy::updateCurrent(sf::Time dt)
     return;
   }
 
-   mStateMachine.update();
+  mStateMachine.update();
 
-   // Velocity
-   sf::Vector2f steering = mSteering.calculate(dt);
-   mVelocity += steering * dt.asSeconds();
+  // Velocity
+  sf::Vector2f steering = mSteering.calculate(dt);
+  mVelocity += steering * dt.asSeconds();
 
-   truncateVec(mVelocity, mMaxSpeed);
+  truncateVec(mVelocity, mMaxSpeed);
 
-   move(mVelocity);
+  move(mVelocity);
 
-    //Check if enemy has moved onto trap
-   std::vector<Scenery*> traps = getObstacles();
+  //Check if enemy has moved onto trap
+  std::vector<Scenery*> traps = getObstacles();
 
-   std::vector<Scenery*>::iterator iter;
+  std::vector<Scenery*>::iterator iter;
 
-   for (int i = 0; i < traps.size(); i++)
-   {
-     int mag = magVec(getWorldPosition() - traps.at(i)->getWorldPosition());
+  for (int i = 0; i < traps.size(); i++)
+  {
+    int mag = magVec(getWorldPosition() - traps.at(i)->getWorldPosition());
 
-     if(mag < 40.f)
-     {
-       decreaseLives();
-       mWorld->incEnemiesTrapped();
-       mWorld->decEnemies();
+    if (mag < 40.f)
+    {
+      decreaseLives();
+      mWorld->incScore();
+      mWorld->decEnemies();
 
-       break;
-     }
-   }
+      break;
+    }
+  }
 
-   int sign = signVec(mHeading, mVelocity);
+  int sign = signVec(mHeading, mVelocity);
 
-   float angle = std::acos(dotVec(mHeading, normVec(mVelocity)));
-   float angle2 = dotVec(mHeading, normVec(mVelocity));
-   //    angle *= sign;
+  float angle = std::acos(dotVec(mHeading, normVec(mVelocity)));
+  angle *= sign;
 
-   //       clampRotation(angle
-   //                     , -mMaxTurnRate
-   //                     , mMaxTurnRate);
+  clampRotation(angle
+    , -mMaxTurnRate
+    , mMaxTurnRate);
 
-   //       sf::Vector2f toCursor = mVelocity;
-   //       float angle2 = std::atan2(mVelocity.x, -mVelocity.y);
+  sf::Vector2f toCursor = mVelocity;
+  float angle2 = std::atan2(mVelocity.x, -mVelocity.y);
 
-   //  std::cout << "Entity angle 2: " << angle2 << std::endl
 
-   //  std::cout << "Angle: " << radianToDegree(angle) << std::endl;
-   //  std::cout << "Angle2: " << angle2 << std::endl;
+  if (std::abs(radianToDegree(angle)) > 8.f)
+    rotate(radianToDegree(angle));
 
-   if (std::abs(radianToDegree(angle)) > 8.f)
-     rotate(radianToDegree(angle));
-
-   Entity::updateCurrent(dt);
+  Entity::updateCurrent(dt);
 }
 
 void Enemy::drawCurrent(sf::RenderTarget& target
-                        , sf::RenderStates states) const
+  , sf::RenderStates states) const
 {
-   Entity::drawCurrent(target, states);
+  Entity::drawCurrent(target, states);
 }
 

@@ -86,8 +86,6 @@ public:
   void                                        handleInput();
   void                                        display();
 
-  void                                        regenWorld(const Controller& controller);
-
   // Getters
   const sf::FloatRect                          getViewBounds() const;
 
@@ -96,8 +94,10 @@ public:
   const sf::FloatRect                          getWorldBounds() const { return mWorldBounds; }
 
   // Setters
-  void                                         incEnemiesTrapped();
+  void                                         incScore();
   void                                         decEnemies();
+
+  sf::Vector2f                                 getFocusPoint() { return mFocusPoint; }
 };
 
 #endif // WORLD_HPP
