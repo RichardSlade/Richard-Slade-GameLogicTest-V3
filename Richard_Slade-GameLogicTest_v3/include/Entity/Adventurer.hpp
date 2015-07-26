@@ -20,46 +20,36 @@
 class Adventurer : public Entity
 {
 private:
-    const sf::RenderWindow&        mWindow;
+  const sf::RenderWindow&        mWindow;
 
-    sf::Time                       mFlashTime;
-    sf::Time                       mFlashCounter;
+  sf::Time                       mFlashTime;
+  sf::Time                       mFlashCounter;
 
-    virtual void                    updateCurrent(sf::Time);
-    virtual void                    drawCurrent(sf::RenderTarget&
-                                            , sf::RenderStates) const;
+  virtual void                    updateCurrent(sf::Time);
+  virtual void                    drawCurrent(sf::RenderTarget&
+    , sf::RenderStates) const;
 
 public:
-                                    Adventurer(const sf::RenderWindow& window
-                                              //, QuadTree* quadTree
-                                              //, Level* level
-                                              , World* world
-                                              , const sf::Texture&
-                                              , const sf::Font&
-                                              , sf::Vector2f
-                                              , EntityStats
-                                              , const Params&
-                                              , float scale = 1.f);
+  Adventurer(const sf::RenderWindow& window
+    , World* world
+    , const sf::Texture&
+    , const sf::Font&
+    , sf::Vector2f
+    , EntityStats
+    , const Params&
+    , float scale = 1.f);
 
-   virtual                          ~Adventurer(){};
+  virtual                          ~Adventurer(){};
 
-//   void                             rotateToCursor();
+  void                             addToPath(sf::Vector2f pos)
+  {
+    mSteering.addToPath(pos);
+  }
 
-   void                             addToPath(sf::Vector2f pos)
-                                    { mSteering.addToPath(pos); }
-
-   void                             startNewPath(sf::Vector2f pos)
-                                    { mSteering.startNewPath(pos); }
-
-   // Getters
-   //bool                             isSelected(){ return mIsSelected; }
-
-   // Setters
-
-   //void                             setIsSelected(bool status){ mIsSelected = status; }
-
-
-//   Entity*                           getCurrentTarget() {return mCurrentTarget;}
+  void                             startNewPath(sf::Vector2f pos)
+  {
+    mSteering.startNewPath(pos);
+  }
 };
 
 #endif // ADVENTURER_HPP

@@ -43,11 +43,9 @@ public:
                                             SceneNode();
     virtual                                 ~SceneNode(){};
 
-  //virtual void                              addToQuadTree(QuadTree* quadTree);
   virtual sf::FloatRect                     getBounds() const { return sf::FloatRect(); };
 
 
-//    void                                    addToQuadTree(QuadTree* quadTree);
     void                                    update(sf::Time);
 
     void                                    addChild(upScNode);

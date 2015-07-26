@@ -30,91 +30,89 @@
 class Controller : sf::NonCopyable
 {
 public:
-   typedef std::unique_ptr<sf::Texture> upTexture;
-   typedef std::unique_ptr<sf::Font> upFont;
+  typedef std::unique_ptr<sf::Texture> upTexture;
+  typedef std::unique_ptr<sf::Font> upFont;
 
-    static const sf::Time           mFPS;
+  static const sf::Time           mFPS;
 
-    enum Textures
-    {
-        Adventurer,
-        Enemy,
-        Grass,
-        Wall,
-        Corner,
-        Exit,
-        Brick,
-        Stone,
-        Trap,
-        Background,
-//        Ground,
-        NumTextures
-    };
+  enum Textures
+  {
+    Adventurer,
+    Enemy,
+    Brick,
+    Trap,
+    Background,
+    NumTextures
+  };
 
-    enum Fonts
-    {
-        Sansation,
-//        Smoke,
-//        Enemyy,
-        NumFonts
-    };
+  enum Fonts
+  {
+    Sansation,
+    NumFonts
+  };
 
 private:
-    Params                          mParams;
+  Params                          mParams;
 
-    const float                     mWindowX;
-    const float                     mWindowY;
+  const float                     mWindowX;
+  const float                     mWindowY;
 
-    sf::RenderWindow                mWindow;
-    sf::Clock                       mClock;
-//    sf::Time                        mCountDown;
-//    sf::Time                        mTimeSinceLastUpdate;
-    sf::Vector2f                    mResetViewCenter;
+  sf::RenderWindow                mWindow;
+  sf::Clock                       mClock;
+  sf::Vector2f                    mResetViewCenter;
 
-    sf::Text                        mStatisticsText;
-    sf::Time				            mStatisticsUpdateTime;
-   std::size_t				            mStatisticsNumFrames;
+  sf::Text                        mStatisticsText;
+  sf::Time				                mStatisticsUpdateTime;
+  std::size_t				            mStatisticsNumFrames;
 
-//    sf::RenderTexture               mBackgroundTexture;
-    std::vector<Controller::upTexture>        mTextures;
-    std::vector<Controller::upFont>           mFonts;
+  std::vector<Controller::upTexture>        mTextures;
+  std::vector<Controller::upFont>           mFonts;
 
-    AppState::StateType             mAppStateType;
-    std::unique_ptr<AppState>       mCurrentAppState;
+  AppState::StateType             mAppStateType;
+  std::unique_ptr<AppState>       mCurrentAppState;
 
-    std::string                     mUserName;
-    bool                            mChangeState;
+  std::string                     mUserName;
+  bool                            mChangeState;
 
 
-    void                            loadMedia();
-    const sf::Texture     createBackgroundTexture();
-    void                            changeAppState();
+  void                            loadMedia();
+  void                            changeAppState();
 
-   void	                          updateStatistics(sf::Time dt);
+  void	                          updateStatistics(sf::Time dt);
 
 public:
-                                    Controller();
+  Controller();
 
-    void                            run();
+  void                            run();
 
-    // Getters
-    const sf::Texture&              getTexture(Textures type) const
-                                    { return *mTextures.at(type).get(); }
+  // Getters
+  const sf::Texture&              getTexture(Textures type) const
+  {
+    return *mTextures.at(type).get();
+  }
 
-    const sf::Font&                 getFont(Controller::Fonts type) const
-                                    { return *mFonts.at(type).get(); }
+  const sf::Font&                 getFont(Controller::Fonts type) const
+  {
+    return *mFonts.at(type).get();
+  }
 
-    const Params&                   getParams() const
-                                    { return mParams; }
+  const Params&                   getParams() const
+  {
+    return mParams;
+  }
 
-    // Setters
-    void                            resetView();
+  // Setters
+  void                            resetView();
 
-    void                            changeState()
-                                    { mChangeState = true; }
+  void                            changeState()
+  {
+    mChangeState = true;
+  }
 
-    void                            setUserName(std::string name)
-                                    { mUserName = name; }
+  void                            setUserName(std::string name)
+  {
+    mUserName = name;
+  }
 };
 
 #endif // CONTROLLER_HPP

@@ -75,8 +75,6 @@ public:
 
 	void							setGlobalState(State<entity_type>* newState) {mGlobalState = newState;}
 
-//	void                       returnToPreviousState() {changeState(mPreviousState);}
-
    int              getCurrentStateType() {return mCurrentStateType;}
 
 };

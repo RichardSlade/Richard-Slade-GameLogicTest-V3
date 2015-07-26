@@ -1,7 +1,6 @@
 #include <cmath>
 
 #include "World/Scenery.hpp"
-#include "World/QuadTree.hpp"
 
 Scenery::Scenery(const sf::Texture& texture,
         sf::Vector2f pos,

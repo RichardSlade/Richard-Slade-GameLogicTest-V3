@@ -5,115 +5,95 @@
 #include "App/Params.hpp"
 
 GameState::GameState(Controller& cntrl
-                     , sf::RenderWindow& window
-                     , std::string username)
-: mResetNumEnemy(cntrl.getParams().NumEnemy)
-//, mLevelTimeMin(cntrl.getParams().LevelTimeMin)
-//, mResetLevelTime(cntrl.getParams().LevelTimeMax)
-, mNumEnemy(mResetNumEnemy)
-, mTotalEnemiesTrapped(0)
-, mController(cntrl)
-, mWindow(window)
-, mWorldDim(cntrl.getParams().LevelBlockSize * cntrl.getParams().LevelBlockX)
-//, mLevelTime(sf::seconds(mResetLevelTime * 60.f))
-
-, mUsername(username)
-, mWorld(new World(*this
-                   , cntrl
-                   , window
-                   , "Debug"
-                   , mWorldDim
-                   , mNumEnemy))
-, mPausedScreen(mController
-                , *this
-                , mWindow)
-, mLevelCompleteScreen(mController
-                     , *this
-                     , mWindow)
-, mGameCompleteScreen(mController
-                   , *this
-                   , mWindow)
-, mCurrentScreen(GameState::Screen::Game)
-, mNewScreen(mCurrentScreen)
-, mPaused(false)
+  , sf::RenderWindow& window
+  , std::string username)
+  : mResetNumEnemy(cntrl.getParams().NumEnemy)
+  , mNumEnemy(mResetNumEnemy)
+  , mTotalEnemiesTrapped(0)
+  , mController(cntrl)
+  , mWindow(window)
+  , mWorldDim(cntrl.getParams().LevelBlockSize * cntrl.getParams().LevelBlockX)
+  , mUsername(username)
+  , mWorld(new World(*this
+                      , cntrl
+                      , window
+                      , "Debug"
+                      , mWorldDim
+                      , mNumEnemy))
+  , mPausedScreen(mController
+                  , *this
+                  , mWindow)
+  , mCurrentScreen(GameState::Screen::Game)
+  , mNewScreen(mCurrentScreen)
+  , mPaused(false)
 {
 
 }
 
 void GameState::restartWorld()
 {
-    mWorld = std::unique_ptr<World>(new World(*this
-                                              , mController
-                                              , mWindow
-                                              , mUsername
-                                              , mWorldDim
-                                              , mResetNumEnemy));
+  mWorld = std::unique_ptr<World>(new World(*this
+                                            , mController
+                                            , mWindow
+                                            , mUsername
+                                            , mWorldDim
+                                            , mResetNumEnemy));
 
-    mNewScreen = GameState::Screen::Game;
+  mNewScreen = GameState::Screen::Game;
 }
 
 void GameState::update(sf::Time dt)
 {
-    if(mNewScreen != mCurrentScreen)
-        mCurrentScreen = mNewScreen;
+  if (mNewScreen != mCurrentScreen)
+    mCurrentScreen = mNewScreen;
 
-    switch(mCurrentScreen)
-    {
-        case GameState::Screen::Game:
-        {
-            if(!mPausedScreen.isPaused())
-                mWorld->update(dt);
-            else
-                mPausedScreen.update(dt);
+  switch (mCurrentScreen)
+  {
+  case GameState::Screen::Game:
+  {
+    if (!mPausedScreen.isPaused())
+      mWorld->update(dt);
+    else
+      mPausedScreen.update(dt);
 
-            break;
-        }
-        case GameState::Screen::LevelComplete: mLevelCompleteScreen.update(dt); break;
-        case GameState::Screen::GameComplete: mGameCompleteScreen.update(dt); break;
-        default: break;
-    }
+    break;
+  }
+  default: break;
+  }
 
-//    handleInput();
+  //    handleInput();
 }
 
 void GameState::handleInput()
 {
-   if(mCurrentScreen == GameState::Screen::Game
-       && mWorld)
-   {
-      if(!mPausedScreen.isPaused())
-      {
-         if(mWorld)
-               mWorld->handleInput();
-      }
-      else
-         mPausedScreen.handleInput();
+  if (mCurrentScreen == GameState::Screen::Game
+    && mWorld)
+  {
+    if (!mPausedScreen.isPaused())
+    {
+      if (mWorld)
+        mWorld->handleInput();
     }
-    else if(mCurrentScreen == GameState::Screen::LevelComplete)
-        mLevelCompleteScreen.handleInput();
-    else if(mCurrentScreen == GameState::Screen::GameComplete)
-        mGameCompleteScreen.handleInput();
+    else
+      mPausedScreen.handleInput();
+  }
 }
 
 void GameState::display()
 {
-    if(mWorld)
-        mWorld->display();
+  if (mWorld)
+    mWorld->display();
 
-    if(mCurrentScreen == GameState::Screen::Game)
-    {
-        if(mPausedScreen.isPaused())
-            mWindow.draw(mPausedScreen);
-    }
-    else if(mCurrentScreen == GameState::Screen::LevelComplete)
-        mWindow.draw(mLevelCompleteScreen);
-    else if(mCurrentScreen == GameState::Screen::GameComplete)
-        mWindow.draw(mGameCompleteScreen);
+  if (mCurrentScreen == GameState::Screen::Game)
+  {
+    if (mPausedScreen.isPaused())
+      mWindow.draw(mPausedScreen);
+  }
 }
 
 void GameState::pause()
 {
-    mPausedScreen.setup(mWindow.getView());
+  mPausedScreen.setup(mWindow.getView());
 }
 
 void GameState::levelComplete()
@@ -124,9 +104,9 @@ void GameState::levelComplete()
 void GameState::gameComplete(int sheepFromLastLevel)
 {
   quitGameState();
-    //mNewScreen = GameState::Screen::GameComplete;
+  //mNewScreen = GameState::Screen::GameComplete;
 
-    //mGameCompleteScreen.setup(mWindow.getView(), mTotalEnemiesTrapped + sheepFromLastLevel);
+  //mGameCompleteScreen.setup(mWindow.getView(), mTotalEnemiesTrapped + sheepFromLastLevel);
 }
 
 void GameState::nextLevel()
@@ -136,15 +116,15 @@ void GameState::nextLevel()
 
 void GameState::resetGame()
 {
-    //mWorldDim = mResetWorldDim;
-    //mLevelTime = sf::seconds(mResetLevelTime * 60.f);
+  //mWorldDim = mResetWorldDim;
+  //mLevelTime = sf::seconds(mResetLevelTime * 60.f);
 
-    mTotalEnemiesTrapped = 0;
+  mTotalEnemiesTrapped = 0;
 
-    restartWorld();
+  restartWorld();
 }
 
 void GameState::quitGameState()
 {
-    mController.changeState();
+  mController.changeState();
 }

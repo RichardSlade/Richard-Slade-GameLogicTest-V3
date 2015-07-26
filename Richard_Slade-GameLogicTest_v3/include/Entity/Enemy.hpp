@@ -11,80 +11,60 @@ class Adventurer;
 class Enemy : public Entity
 {
 public:
-   typedef std::vector<std::unique_ptr<State<Enemy>>> StateContainer;
+  typedef std::vector<std::unique_ptr<State<Enemy>>> StateContainer;
 
-   enum States
-   {
-      LookOut,
-      Relax,
-      Attack,
-      NumStates
-   };
+  enum States
+  {
+    LookOut,
+    Relax,
+    Attack,
+    NumStates
+  };
 
-   const float                 mSightRange;
-   const float                 mAngleOfVision;
-   const unsigned int          mAggroDistance;
-//    const float                 mPanicDistance;
+  const unsigned int          mAggroDistance;
 
 private:
-//    sf::Vector2i                mTargetBlockIndex;
+  StateContainer&             mStates;
+  StateMachine<Enemy>         mStateMachine;
 
-//    std::vector<State<Enemy>>&  mStates;
-    StateContainer&             mStates;
-    StateMachine<Enemy>         mStateMachine;
-
-    //Adventurer*                mAdventurerTarget;
-
-
-    virtual void                updateCurrent(sf::Time);
-    virtual void                drawCurrent(sf::RenderTarget&
-                                            , sf::RenderStates) const;
+  virtual void                updateCurrent(sf::Time);
+  virtual void                drawCurrent(sf::RenderTarget&
+    , sf::RenderStates) const;
 
 public:
-                                Enemy(//QuadTree* quadTree
-                                       //Level* level
-                                       World* world
-                                       //, Adventurer* player
-                                      , const sf::Texture&
-                                      , const sf::Font&
-                                      , sf::Vector2f
-                                      , EntityStats
-                                      , const Params&
-                                      , State<Enemy>*
-                                      , State<Enemy>*
-                                      , StateContainer&
-                                      , unsigned int currentState
-                                      , float = 1.f);
+  Enemy(World* world
+    , const sf::Texture&
+    , const sf::Font&
+    , sf::Vector2f
+    , EntityStats
+    , const Params&
+    , State<Enemy>*
+    , State<Enemy>*
+    , StateContainer&
+    , unsigned int currentState
+    , float = 1.f);
 
-    virtual                    ~Enemy(){};
+  virtual                    ~Enemy(){};
 
-    void                        changeState(Enemy::States newState)
-                                { mStateMachine.changeState(mStates.at(newState).get(), newState); }
+  void                        changeState(Enemy::States newState)
+  {
+    mStateMachine.changeState(mStates.at(newState).get(), newState);
+  }
 
-    // Getters
-//    LevelBlock*                 getTargetBlock()
-//                                { return getLevelBlock(mTargetBlockIndex); }
+  // Setters
+  void                        setVelocity(sf::Vector2f vel)
+  {
+    mVelocity = vel;
+  }
 
-//   Entity*                getCurrentTarget() { return mCurrentTarget; }
+  void                        setText(std::string msg)
+  {
+    mText.setString(msg);
+    mText.setColor(sf::Color(255, 255, 255, 255));
+  }
 
-    // Setters
-    void                        setVelocity(sf::Vector2f vel)
-                                { mVelocity = vel; }
+  unsigned int                getCurrentStateType() { return mStateMachine.getCurrentStateType(); }
 
-    void                        setText(std::string msg)
-                                {
-                                    mText.setString(msg);
-                                    mText.setColor(sf::Color(255, 255, 255, 255));
-                                }
-
-      unsigned int                     getCurrentStateType() {return mStateMachine.getCurrentStateType(); }
-
-//
-//    void                        setTargetBlockIndex(sf::Vector2i index)
-//                                { mTargetBlockIndex = index; }
-
-//    void                        returnToPreviousState()
-//                                { mStateMachine.returnToPreviousState(); }
 };
 
 #endif // ENEMY_HPP

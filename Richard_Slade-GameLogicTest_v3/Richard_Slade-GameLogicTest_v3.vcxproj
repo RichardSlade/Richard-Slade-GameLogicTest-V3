@@ -13,10 +13,8 @@
   <ItemGroup>
     <ClInclude Include="include\App\AppState.hpp" />
     <ClInclude Include="include\App\Controller.hpp" />
-    <ClInclude Include="include\App\GameCompleteScreen.hpp" />
     <ClInclude Include="include\App\GameState.hpp" />
     <ClInclude Include="include\App\HUD.hpp" />
-    <ClInclude Include="include\App\LevelCompleteScreen.hpp" />
     <ClInclude Include="include\App\MenuState.hpp" />
     <ClInclude Include="include\App\Params.hpp" />
     <ClInclude Include="include\App\PausedScreen.hpp" />
@@ -34,7 +32,6 @@
     <ClInclude Include="include\SceneNode\SceneNode.hpp" />
     <ClInclude Include="include\SceneNode\SpriteNode.hpp" />
     <ClInclude Include="include\World\Scenery.hpp" />
-    <ClInclude Include="include\World\WallBlock.hpp" />
     <ClInclude Include="include\World\World.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -43,10 +40,8 @@
     <ClCompile Include="src\enemy.cpp" />
     <ClCompile Include="src\enemyStates.cpp" />
     <ClCompile Include="src\entity.cpp" />
-    <ClCompile Include="src\gameCompleteScreen.cpp" />
     <ClCompile Include="src\gameState.cpp" />
     <ClCompile Include="src\hud.cpp" />
-    <ClCompile Include="src\levelCompleteScreen.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\menuState.cpp" />
     <ClCompile Include="src\path.cpp" />
@@ -56,7 +51,6 @@
     <ClCompile Include="src\spriteNode.cpp" />
     <ClCompile Include="src\steeringBehaviour.cpp" />
     <ClCompile Include="src\utility.cpp" />
-    <ClCompile Include="src\wall.cpp" />
     <ClCompile Include="src\world.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

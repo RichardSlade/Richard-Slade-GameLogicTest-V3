@@ -13,54 +13,54 @@ class Controller;
 class MenuState : public AppState
 {
 private:
-    enum MenuType
-    {
-        Main,
-        Help,
-        Quit,
-        Start,
-        NumMenuType
-    };
+  enum MenuType
+  {
+    Main,
+    Help,
+    Quit,
+    Start,
+    NumMenuType
+  };
 
-    static const int            mMaxTextNum;
-    static const sf::Color      mSelectedTextColour;
-    static const sf::Color      mOtherTextColour;
-    static const sf::Time       mUnderscoreResetTime;
+  static const int            mMaxTextNum;
+  static const sf::Color      mSelectedTextColour;
+  static const sf::Color      mOtherTextColour;
+  static const sf::Time       mUnderscoreResetTime;
 
-    sf::View                    mView;
-    sf::Vector2f                mViewCenter;
+  sf::View                    mView;
+  sf::Vector2f                mViewCenter;
 
-    const sf::Vector2f          mMenuTextPos;
+  const sf::Vector2f          mMenuTextPos;
 
-    Controller&                 mController;
-    sf::RenderWindow&           mWindow;
+  Controller&                 mController;
+  sf::RenderWindow&           mWindow;
 
-    sf::Sprite                  mBackground;
-    sf::Text                    mTitleText;
+  sf::Sprite                  mBackground;
+  sf::Text                    mTitleText;
 
-    std::vector<sf::Text>       mMenuText;
+  std::vector<sf::Text>       mMenuText;
 
-    MenuType                    mCurrentMenu;
-    MenuType                    mNewMenu;
-    MenuType                    mPreviousMenu;
+  MenuType                    mCurrentMenu;
+  MenuType                    mNewMenu;
+  MenuType                    mPreviousMenu;
 
-    int                         mCurrentMenuSelection;
+  int                         mCurrentMenuSelection;
 
-    void                        handleMenuInput(int);
-    void                        changeMenu(MenuType);
-    int                         getMaxMenuSelection(MenuType);
+  void                        handleMenuInput(int);
+  void                        changeMenu(MenuType);
+  int                         getMaxMenuSelection(MenuType);
 
-    MenuType                    getSelectionMenuType(int);
+  MenuType                    getSelectionMenuType(int);
 
 public:
-                                MenuState(Controller&
-                                      , sf::RenderWindow&);
+  MenuState(Controller&
+    , sf::RenderWindow&);
 
-    virtual                     ~MenuState(){};
+  virtual                     ~MenuState(){};
 
-    virtual void                update(sf::Time);
-    virtual void                handleInput();
-    virtual void                display();
+  virtual void                update(sf::Time);
+  virtual void                handleInput();
+  virtual void                display();
 };
 
 #endif // MENUSTATE_HPP

@@ -5,12 +5,8 @@
 #include "App/Utility.hpp"
 #include "World/World.hpp"
 #include "Entity/Enemy.hpp"
-#include "Entity\Adventurer.hpp"
 
-Enemy::Enemy(//QuadTree* quadTree
-//Level* level
-World* world
-//, Adventurer* adventurer
+Enemy::Enemy(World* world
 , const sf::Texture& texture
 , const sf::Font& font
 , sf::Vector2f pos
@@ -21,8 +17,7 @@ World* world
 , StateContainer& states
 , unsigned int currentState
 , float scale)
-: Entity(//quadTree
-          world
+: Entity(world
          , texture
          , font
          , pos
@@ -30,15 +25,11 @@ World* world
          , params
          , Entity::Type::Enemy
          , scale)
-, mSightRange(params.EnemySightRange)
-, mAngleOfVision(params.EnemyAngleOfVision)
 , mAggroDistance(stats.aggroDistance)
 , mStates(states)
 , mStateMachine(this, globalState, initState, currentState)
 {
-//    mText.setPosition(-10.f, -40.f);
 
-//    mCurrentBlock = mLevel->insertEntityIntoLevel(this);
 }
 
 void Enemy::updateCurrent(sf::Time dt)
@@ -63,19 +54,14 @@ void Enemy::updateCurrent(sf::Time dt)
     //Check if enemy has moved onto trap
    std::vector<Scenery*> traps = getObstacles();
 
-   //std::cout << "traps: " << traps.size() << std::endl;
-
    std::vector<Scenery*>::iterator iter;
 
    for (int i = 0; i < traps.size(); i++)
    {
      int mag = magVec(getWorldPosition() - traps.at(i)->getWorldPosition());
 
-     //std::cout << "mag: " << mag << std::endl;
-
      if(mag < 40.f)
      {
-       //std::cout << "dead" << std::endl;
        decreaseLives();
        mWorld->incEnemiesTrapped();
        mWorld->decEnemies();
@@ -83,8 +69,6 @@ void Enemy::updateCurrent(sf::Time dt)
        break;
      }
    }
-
-   //mBody->SetLinearVelocity(convertVec(mVelocity));
 
    int sign = signVec(mHeading, mVelocity);
 
@@ -116,7 +100,3 @@ void Enemy::drawCurrent(sf::RenderTarget& target
    Entity::drawCurrent(target, states);
 }
 
-//void Enemy::changeState(Enemy::States newState)
-//{
-//    mStateMachine.changeState(mStates.at(newState).get());
-//}

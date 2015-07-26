@@ -12,30 +12,27 @@
 #include "App\Utility.hpp"
 
 Adventurer::Adventurer(const sf::RenderWindow& window
-                     //, QuadTree* quadTree
-                     //, Level* level
-                     , World* world
-                     , const sf::Texture& texture
-                     , const sf::Font& font
-                     , sf::Vector2f startPos
-                     , EntityStats stats
-                     , const Params& params
-                     , float scale)
-: Entity(//quadTree
-          world
-        , texture
-         , font
-         , startPos
-         , stats
-         , params
-         , Entity::Type::Adventurer
-         , scale)
-, mWindow(window)
-, mFlashTime(sf::seconds(3.f))
-, mFlashCounter(sf::Time::Zero)
+  , World* world
+  , const sf::Texture& texture
+  , const sf::Font& font
+  , sf::Vector2f startPos
+  , EntityStats stats
+  , const Params& params
+  , float scale)
+  : Entity(world
+  , texture
+  , font
+  , startPos
+  , stats
+  , params
+  , Entity::Type::Adventurer
+  , scale)
+  , mWindow(window)
+  , mFlashTime(sf::seconds(3.f))
+  , mFlashCounter(sf::Time::Zero)
 {
-    setSteeringTypes(SteeringBehaviour::Behaviour::FollowPath);
-    mText.setString("....");
+  setSteeringTypes(SteeringBehaviour::Behaviour::FollowPath);
+  mText.setString("....");
 }
 
 /*
@@ -49,13 +46,13 @@ void Adventurer::updateCurrent(sf::Time dt)
     mToRemove = true;
   }
 
-  if(mFlashCounter > sf::Time::Zero) // Flash if lost life
+  if (mFlashCounter > sf::Time::Zero) // Flash if lost life
   {
     mFlashCounter -= dt;
 
     mSprite.setColor(sf::Color(255, 255, 255, 255));
 
-    if(static_cast<int>(mFlashCounter.asMilliseconds()) % 2 == 0)
+    if (static_cast<int>(mFlashCounter.asMilliseconds()) % 2 == 0)
     {
       mSprite.setColor(sf::Color(255, 255, 255, 0));
     }
@@ -65,7 +62,7 @@ void Adventurer::updateCurrent(sf::Time dt)
       mSprite.setColor(sf::Color(255, 255, 255, 255));
       lostLife = false;
     }
-      
+
   }
   else if (hasLostLife())
   {
@@ -73,18 +70,13 @@ void Adventurer::updateCurrent(sf::Time dt)
   }
 
   sf::Vector2f steering = mSteering.calculate(dt);
-  //    sf::Vector2f acceleration = steering / mMass;
-
-  //    mVelocity += acceleration * dt.asSeconds();
-  mVelocity += steering;// * dt.asSeconds();
-  //    mVelocity = acceleration;// * dt.asSeconds();
+  mVelocity += steering;
 
   if (std::fabs(magVec(mVelocity)) > MINFLOAT)
   {
     int sign = signVec(mHeading, mVelocity);
 
     float angle = std::acos(dotVec(mHeading, normVec(mVelocity)));
-    //        float angle = std::acos(dotVec(mHeading, mVelocity));
     angle *= sign;
 
     clampRotation(angle
@@ -98,9 +90,6 @@ void Adventurer::updateCurrent(sf::Time dt)
   float currentRotation = getRotation() * (PI / 180.f);
   mHeading = sf::Vector2f(std::sin(currentRotation), -std::cos(currentRotation));
 
-  //std::cout << mVelocity.x << ", " << mVelocity.y << std::endl;
-
-  // truncateVec(mVelocity, mMaxSpeed);
   move(mVelocity);
 
   std::vector<Scenery*> obstacles = getObstacles();
@@ -110,26 +99,11 @@ void Adventurer::updateCurrent(sf::Time dt)
     float mag = magVec(getWorldPosition() - obstacles.at(i)->getWorldPosition());
 
     if (mag < 40.f)
-    { 
+    {
       move((getWorldPosition() - obstacles.at(i)->getWorldPosition()) * 0.1f);
       break;
     }
   }
-
-  //move(sf::Vector2f(1, 1));
-
-  //adjustPosition();
-
-  //sf::Vector2i mousePos = sf::Mouse::getPosition(mWindow);
-  //sf::Vector2f convertedMousePos = mWindow.mapPixelToCoords(mousePos);
-  //sf::Vector2f toCursor = convertedMousePos - getWorldPosition();
-
-  //float angle = std::atan2(toCursor.x, -toCursor.y);
-
-  //sf::Transformable::rotate(radianToDegree(angle));
-
-  //std::cout << getWorldPosition().x / 40 << ", " << getWorldPosition().y / 40 << std::endl;
-  //std::cout << getObstacles().size() << std::endl;
 
   Entity::updateCurrent(dt);
 }
@@ -138,24 +112,13 @@ void Adventurer::updateCurrent(sf::Time dt)
 *   Draw function used by SFML to render to sf::RenderTarget
 */
 void Adventurer::drawCurrent(sf::RenderTarget& target
-                                    , sf::RenderStates states) const
+  , sf::RenderStates states) const
 {
-   Entity::drawCurrent(target, states);
+  Entity::drawCurrent(target, states);
 
-   std::vector<sf::CircleShape> wypnts = mSteering.getPathToDraw();
+  std::vector<sf::CircleShape> wypnts = mSteering.getPathToDraw();
 
-   for(sf::CircleShape circle : wypnts)
-     target.draw(circle);
+  for (sf::CircleShape circle : wypnts)
+    target.draw(circle);
 }
 
-//void Adventurer::rotateToCursor()
-//{
-//   sf::Vector2i mousePos = sf::Mouse::getPosition(mWindow);
-//   sf::Vector2f convertedMousePos = pixelToMeter(mWindow.mapPixelToCoords(mousePos));
-//
-//   sf::Vector2f toCursor = convertedMousePos - getWorldPosition();
-//
-//   float angle = std::atan2(toCursor.x, -toCursor.y);
-//
-//   mPhysicsBody->SetTransform(mPhysicsBody->GetPosition(), angle);
-//}

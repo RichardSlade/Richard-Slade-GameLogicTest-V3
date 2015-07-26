@@ -12,43 +12,43 @@ class World;
 class HUD : public sf::Drawable
 {
 public:
-    enum DataType
-    {
-        Name,
-        Enemy,
-        Lives,
-        Score,
-        NumDataType
-    };
+  enum DataType
+  {
+    Name,
+    Enemy,
+    Lives,
+    Score,
+    NumDataType
+  };
 
 private:
-    const World*                            mWorld;
-    sf::RectangleShape                      mHUDBackground;
-    std::vector<sf::Text>                   mHUDText;
+  const World*                            mWorld;
+  sf::RectangleShape                      mHUDBackground;
+  std::vector<sf::Text>                   mHUDText;
 
-    virtual void                            draw(sf::RenderTarget&
-                                                 , sf::RenderStates) const;
+  virtual void                            draw(sf::RenderTarget&
+    , sf::RenderStates) const;
 
 public:
-                                            HUD(World*
-                                                , const sf::Font&
-                                                , sf::FloatRect
-                                                , std::string = "");
+  HUD(World*
+    , const sf::Font&
+    , sf::FloatRect
+    , std::string = "");
 
 
-                                             HUD()
-                                             {
+  HUD()
+  {
 
-                                             };
+  };
 
-    virtual                                 ~HUD(){};
+  virtual                                 ~HUD(){};
 
-    void                                    update(int enemyNum,
-                                                    int playerLives,
-                                                   int score);
+  void                                    update(int enemyNum,
+    int playerLives,
+    int score);
 
-    // Setters
-    void                                    setHUDPosition(sf::FloatRect);
+  // Setters
+  void                                    setHUDPosition(sf::FloatRect);
 };
 
 #endif // HUD_HPP

@@ -9,9 +9,9 @@ class Enemy;
 namespace EnemyStates
 {
 
-struct LookOut : public State<Enemy>
-{
-public:
+  struct LookOut : public State<Enemy>
+  {
+  public:
     virtual             ~LookOut() {};
 
     virtual void        enter(Enemy* host);
@@ -19,11 +19,11 @@ public:
     virtual void        execute(Enemy* host);
 
     virtual void        exit(Enemy* host);
-};
+  };
 
-struct Relax : public State<Enemy>
-{
-public:
+  struct Relax : public State<Enemy>
+  {
+  public:
     virtual             ~Relax() {};
 
     virtual void        enter(Enemy* host);
@@ -31,11 +31,11 @@ public:
     virtual void        execute(Enemy* host);
 
     virtual void        exit(Enemy* host);
-};
+  };
 
-struct Attack : public State<Enemy>
-{
-public:
+  struct Attack : public State<Enemy>
+  {
+  public:
     virtual             ~Attack(){};
 
     virtual void        enter(Enemy* host);
@@ -43,7 +43,7 @@ public:
     virtual void        execute(Enemy* host);
 
     virtual void        exit(Enemy* host);
-};
+  };
 
 }
 

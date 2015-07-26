@@ -24,9 +24,6 @@
     <ClInclude Include="include\World\Scenery.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\World\WallBlock.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\World\World.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -66,16 +63,10 @@
     <ClInclude Include="include\App\Controller.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\App\GameCompleteScreen.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\App\GameState.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\App\HUD.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\App\LevelCompleteScreen.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\App\MenuState.hpp">
@@ -107,16 +98,10 @@
     <ClCompile Include="src\entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\gameCompleteScreen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\gameState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\hud.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\levelCompleteScreen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\main.cpp">
@@ -144,9 +129,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\utility.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\wall.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\world.cpp">

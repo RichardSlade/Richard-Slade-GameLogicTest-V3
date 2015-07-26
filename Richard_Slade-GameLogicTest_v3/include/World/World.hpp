@@ -6,12 +6,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
-//#include <SFML/Graphics/Sprite.hpp>
-//#include <SFML/Graphics/Font.hpp>
-//#include <SFML/System/NonCopyable.hpp>
 
-//#include "World/Level.hpp"
-//#include "World/QuadTree.hpp"
 #include "SceneNode/SceneNode.hpp"
 #include "Entity/Enemy.hpp"
 #include "Entity/Adventurer.hpp"
@@ -20,116 +15,89 @@
 #include "App/HUD.hpp"
 
 class Controller;
-//class LevelBlock;
-class Wall;
 class Waypoint;
 class MovingEntity;
 class GameState;
 class SpriteNode;
 class Scenery;
-//class Adventurer;
 
 class World : private sf::NonCopyable
 {
 public:
-   enum Stats
-   {
-     EnemyStats,
-     AdventurerStats,
-     StatsTypeNum
-   };
+  enum Stats
+  {
+    EnemyStats,
+    AdventurerStats,
+    StatsTypeNum
+  };
 
 private:
-   const sf::Vector2f                           mViewSize;
-   const sf::FloatRect                            mWorldBounds;
+  const sf::Vector2f                           mViewSize;
+  const sf::FloatRect                            mWorldBounds;
 
+  const  int                             mLevelBlockX;
+  const  int                            mLevelBlockY;
+  const  int                           mLevelBlockSize;
+  const unsigned int                           mSpacing;
 
-//   const float                                  mPhysicsWorldDim;
-//   const float                                  mPhysicsWorldY;
-//   const float                                  mPixelPerMeter;
-//   const float                                  mPhysicsWorldScale;
+  const float                                  mWaypointRadius;
+  const float                                  mScrollSpeed;
 
-   //const int32                                  mVelocityIter;
-   //const int32                                  mPositionIter;
-   //const float32                                mTimeStep;
-   const  int                             mLevelBlockX;
-   const  int                            mLevelBlockY;
-   const  int                           mLevelBlockSize;
-   const unsigned int                           mSpacing;
+  std::vector<unsigned int>                    mPlayerLives;
 
-   const float                                  mWaypointRadius;
-   const float                                  mScrollSpeed;
+  GameState&                                   mGameState;
+  sf::RenderWindow&                            mWindow;
+  sf::View                                     mWorldView;
+  sf::Vector2f                                 mFocusPoint;
 
-   std::vector<unsigned int>                    mPlayerLives;
+  std::vector<std::vector<Scenery*>>           mObstacles;
 
-   GameState&                                   mGameState;
-   sf::RenderWindow&                            mWindow;
-   sf::View                                     mWorldView;
-//   sf::RectangleShape                           mWorldRect;
-   sf::Vector2f                                 mFocusPoint;
-   //QuadTree::upQuadTree                         mQuadTree;
+  SceneNode                                    mSceneGraph;
+  std::array<SceneNode*
+    , SceneNode::Layers::Num>          mSceneLayers;
 
-   std::vector<std::vector<Scenery*>>           mObstacles;
+  HUD                                          mHUD;
 
-   SceneNode                                    mSceneGraph;
-   std::array<SceneNode*
-             , SceneNode::Layers::Num>          mSceneLayers;
+  std::vector<EntityStats>                     mEntityStats;
+  Enemy::StateContainer                        mEnemyStates;
 
-   //sf::Time                                     mTimeLeft;
-   //sf::Time                                     mTimeTaken;
+  SpriteNode*                                  mBackground;
+  sf::Vector2f                                 mExitPos;
+  std::vector<Adventurer*>                     mAdventurers;
 
-   //std::unique_ptr<Level>                       mLevel;
+  Adventurer*                                  mCurrentAdventurer;
+  unsigned int                                 mCurrentAdventurerIndex;
 
-   HUD                                          mHUD;
+  void                                         initialiseStatesAndStats();
+  void                                         buildScene(const Controller&);
+  void                                         generateAgents(const Controller&);
 
-   std::vector<EntityStats>                     mEntityStats;
-   //Adventurer::StateContainer                   mAdventurerStates;
-   Enemy::StateContainer                        mEnemyStates;
-
-   SpriteNode*                                  mBackground;
-   sf::Vector2f                                 mExitPos;
-   std::vector<Adventurer*>                     mAdventurers;
-
-   Adventurer*                                  mCurrentAdventurer;
-   unsigned int                                 mCurrentAdventurerIndex;
-
-   void                                         initialiseStatesAndStats();
-   void                                         buildScene(const Controller&);
-   void                                         generateAgents(const Controller&);
-
-    void                                        handleRealTimeInput();
-    void                                        adjustView();
-    void                                        rotateViewToAdventurer();
-
-    //void                                        cycleAdventurer();
-
-   void	                                       adaptPlayerVelocity();
+  void                                        handleRealTimeInput();
 
 public:
-                                                World(GameState&
-                                                      , const Controller&
-                                                      , sf::RenderWindow&
-                                                      , std::string
-                                                      , int worldDim
-                                                      , int numEnemy);
+  World(GameState&
+    , const Controller&
+    , sf::RenderWindow&
+    , std::string
+    , int worldDim
+    , int numEnemy);
 
-    void                                        update(sf::Time);
-    //void                                        updatePhysicsEngine();
-    void                                        handleInput();
-    void                                        display();
+  void                                        update(sf::Time);
+  void                                        handleInput();
+  void                                        display();
 
-    void                                          regenWorld(const Controller& controller);
+  void                                        regenWorld(const Controller& controller);
 
-    // Getters
-   const sf::FloatRect                          getViewBounds() const;
+  // Getters
+  const sf::FloatRect                          getViewBounds() const;
 
-   std::vector<Scenery*>                        getObstacles(sf::Vector2f pos);
+  std::vector<Scenery*>                        getObstacles(sf::Vector2f pos);
 
-    const sf::FloatRect                          getWorldBounds() const { return mWorldBounds; }
+  const sf::FloatRect                          getWorldBounds() const { return mWorldBounds; }
 
-    // Setters
-    void                                         incEnemiesTrapped();
-    void                                         decEnemies();
+  // Setters
+  void                                         incEnemiesTrapped();
+  void                                         decEnemies();
 };
 
 #endif // WORLD_HPP

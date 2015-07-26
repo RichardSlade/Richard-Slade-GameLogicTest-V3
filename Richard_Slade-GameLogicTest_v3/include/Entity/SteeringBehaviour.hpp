@@ -11,7 +11,6 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/System/Time.hpp>
 
-//#include "Enum.hpp"
 #include "Entity/Path.hpp"
 
 class Params;
@@ -34,13 +33,8 @@ public:
         Face,
         Arrive,
         Seek,
-        //Evade,
-        //Wander,
         FollowPath,
         ObstacleAvoidance,
-        //WallAvoidance,
-        //Seperation,
-        //Flock,
         NumBehaviour
     };
 
@@ -53,8 +47,6 @@ public:
         Right,
         NumFlr
     };
-
-//     static const float                     mPI;
 
 private:
      const float                            mWanderRadius;
@@ -99,20 +91,9 @@ private:
                                                    , Deceleration);
 
     sf::Vector2f                            seek(sf::Vector2f);
-
-    //sf::Vector2f                            evade();
-    //sf::Vector2f                            flee(sf::Vector2f);
-
-    //sf::Vector2f                            wander(sf::Time);
     sf::Vector2f                            followPath();
 
     sf::Vector2f                            obstacleAvoidance();
-    //sf::Vector2f                            wallAvoidance();
-
-    sf::Vector2f                            seperation();
-    //sf::Vector2f                            alignment();
-    //sf::Vector2f                            cohesion();
-    //sf::Vector2f                            flocking();
 
 public:
                                             SteeringBehaviour(Entity*

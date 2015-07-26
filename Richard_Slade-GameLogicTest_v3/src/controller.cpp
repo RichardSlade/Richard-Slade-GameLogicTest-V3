@@ -14,39 +14,32 @@
 #include "App/Controller.hpp"
 #include "App/MenuState.hpp"
 #include "App/GameState.hpp"
-#include "World/LevelBlock.hpp"
 
 // Const FPS for frame cap
 const sf::Time Controller::mFPS = sf::seconds(1.f / 60.f);
 
 Controller::Controller()
-: mParams()
-, mWindowX(mParams.WindowX)
-, mWindowY(mParams.WindowY)
-, mWindow(sf::VideoMode(mWindowX, mWindowY), "AI Steering behaviours")// sf::Style::Fullscreen)
-//, mCountDown(sf::Time::Zero)
-//, mTimeSinceLastUpdate(sf::Time::Zero)
-, mResetViewCenter(mWindow.getView().getCenter())
-, mStatisticsText()
-, mStatisticsUpdateTime()
-, mStatisticsNumFrames(0)
-, mAppStateType(AppState::StateType::Menu)
-, mChangeState(false)
+  : mParams()
+  , mWindowX(mParams.WindowX)
+  , mWindowY(mParams.WindowY)
+  , mWindow(sf::VideoMode(mWindowX, mWindowY), "AI Steering behaviours")
+  , mResetViewCenter(mWindow.getView().getCenter())
+  , mStatisticsText()
+  , mStatisticsUpdateTime()
+  , mStatisticsNumFrames(0)
+  , mAppStateType(AppState::StateType::Menu)
+  , mChangeState(false)
 {
-    mWindow.setPosition(sf::Vector2i(0, 0));
-    loadMedia();
+  mWindow.setPosition(sf::Vector2i(0, 0));
+  loadMedia();
 
-    mStatisticsText.setFont(getFont(Controller::Fonts::Sansation));
-    mStatisticsText.setCharacterSize(16);
-    mStatisticsText.setString("0.000");
+  mStatisticsText.setFont(getFont(Controller::Fonts::Sansation));
+  mStatisticsText.setCharacterSize(16);
+  mStatisticsText.setString("0.000");
 
-    // Initialise menu state
-    mCurrentAppState = std::unique_ptr<MenuState>(new MenuState(*this,
-                                                                mWindow));
-
-    //mCurrentAppState = std::unique_ptr<GameState>(new GameState(*this,
-    //                                                            mWindow
-    //                                                            , "Debug"));
+  // Initialise menu state
+  mCurrentAppState = std::unique_ptr<MenuState>(new MenuState(*this,
+    mWindow));
 };
 
 /*
@@ -55,129 +48,64 @@ Controller::Controller()
 */
 void Controller::loadMedia()
 {
-    for(unsigned int i = 0; i < Textures::NumTextures; i++)
-        mTextures.push_back(Controller::upTexture());
+  for (unsigned int i = 0; i < Textures::NumTextures; i++)
+    mTextures.push_back(Controller::upTexture());
 
-    std::vector<std::string> fileNames;
-    fileNames.push_back("media/textures/adventurer.png");
-    fileNames.push_back("media/textures/enemy.png");
-    fileNames.push_back("media/textures/grass.png");
-    fileNames.push_back("media/textures/wall.png");
-    fileNames.push_back("media/textures/corner.png");
-    fileNames.push_back("media/textures/exit.png");
-//    fileNames.push_back("media/textures/checkerMeter.png");
-    fileNames.push_back("media/textures/brickLargeBorder.png");
-    fileNames.push_back("media/textures/stoneLarge.png");
-    fileNames.push_back("media/textures/barrel.png");
-    fileNames.push_back("media/textures/background.png");
+  std::vector<std::string> fileNames;
+  fileNames.push_back("media/textures/adventurer.png");
+  fileNames.push_back("media/textures/enemy.png");
+  fileNames.push_back("media/textures/brickLarge.png");
+  fileNames.push_back("media/textures/barrel.png");
+  fileNames.push_back("media/textures/background.png");
 
-   assert(mTextures.size() >= fileNames.size());
+  assert(mTextures.size() >= fileNames.size());
 
-   std::vector<Controller::upTexture>::iterator texIter = mTextures.begin();
-   std::vector<std::string>::iterator fileNameIter;
+  std::vector<Controller::upTexture>::iterator texIter = mTextures.begin();
+  std::vector<std::string>::iterator fileNameIter;
 
-   unsigned int index = 0;
+  unsigned int index = 0;
 
-    for(fileNameIter = fileNames.begin();
-         fileNameIter != fileNames.end();
-         fileNameIter++)
-    {
-      sf::Texture t;
+  for (fileNameIter = fileNames.begin();
+    fileNameIter != fileNames.end();
+    fileNameIter++)
+  {
+    sf::Texture t;
 
-      if(!t.loadFromFile(*fileNameIter))
-         throw std::runtime_error("Failed to load file: " + *fileNameIter);
+    if (!t.loadFromFile(*fileNameIter))
+      throw std::runtime_error("Failed to load file: " + *fileNameIter);
 
-//      Controller::upTexture upTex(new sf::Texture(t));
+    if (index == Controller::Textures::Brick)
+      t.setRepeated(true);
 
-      if(index == Controller::Textures::Brick
-        || index == Controller::Textures::Stone)
-         t.setRepeated(true);
+    (*texIter).reset(new sf::Texture(t));
+    texIter++;
 
-      (*texIter).reset(new sf::Texture(t));
-      texIter++;
+    index++;
 
-      index ++;
+  }
 
-//      mTextures.at(index) =
-    }
+  // Fonts
+  for (unsigned int i = 0; i < Fonts::NumFonts; i++)
+    mFonts.push_back(Controller::upFont());
 
-//   texIter ++;
-//   sf::Texture tex = mTe;
-//   tex.setRepeated(true);
-//   mTextures.at(Controller::Textures::GameBackground).reset(new sf::Texture(tex));
+  std::vector<Controller::upFont>::iterator fontIter = mFonts.begin();
 
-   // Fonts
-   for(unsigned int i = 0; i < Fonts::NumFonts; i++)
-      mFonts.push_back(Controller::upFont());
+  fileNames.clear();
 
-   std::vector<Controller::upFont>::iterator fontIter = mFonts.begin();
+  fileNames.push_back("media/fonts/Sansation.ttf");
 
-    fileNames.clear();
+  for (fileNameIter = fileNames.begin();
+    fileNameIter != fileNames.end();
+    fileNameIter++)
+  {
+    sf::Font f;
 
-    fileNames.push_back("media/fonts/Sansation.ttf");
-//    fileNames.push_back("media/fonts/AlphaSmoke.TTF");
-//    fileNames.push_back("media/fonts/KingthingsSheepishly.ttf");
+    if (!f.loadFromFile(*fileNameIter))
+      throw std::runtime_error("Failed to load file: " + (*fileNameIter));
 
-     for(fileNameIter = fileNames.begin();
-         fileNameIter != fileNames.end();
-         fileNameIter++)
-    {
-        sf::Font f;
-
-        if(!f.loadFromFile(*fileNameIter))
-            throw std::runtime_error("Failed to load file: " + (*fileNameIter));
-
-        (*fontIter).reset(new sf::Font(f));
-        fontIter++;
-    }
-}
-
-/*
-*   Create tiled background from sf::Textures
-*/
-const sf::Texture Controller::createBackgroundTexture()
-{
-//   const sf::Texture& Tex = getTexture(Textures::Brick);
-//   const sf::Vector2u TexSize = Tex.getSize();
-//
-//   const unsigned int Multiplier = 1;
-//   const unsigned int BackgroundTexSizeX = TexSize.x * Multiplier;
-//   const unsigned int BackgroundTexSizeY = TexSize.y * Multiplier;
-//
-//   sf::RenderTexture backgroundTex;
-//   backgroundTex.create(BackgroundTexSizeX
-//                              , BackgroundTexSizeY);
-//   backgroundTex.clear();
-////   backgroundTex.setRepeated(true);
-//
-//   sf::Vector2f spritePos;
-//
-////   const sf::Texture& texture = getTexture(Textures::Grass);
-//
-////   sf::Sprite sprite(texture, sf::IntRect(sf::Vector2i(0, 0),
-////                                          sf::Vector2i(texture.getSize())));
-////
-////   mBackgroundTexture.draw(sprite);
-//
-//   sf::Sprite sprite(Tex);
-//
-//   for(unsigned int row = 0; row < Multiplier; row ++)
-//   {
-//      for(unsigned int col = 0; col < Multiplier; col++)
-//      {
-//         sprite.setPosition(spritePos);
-//         sprite.setColor(sf::Color(150, 125, 200));
-//         backgroundTex.draw(sprite);
-//
-//         spritePos.x += TexSize.x;
-//      }
-//      spritePos.x = 0.f;
-//      spritePos.y += TexSize.y;
-//   }
-//
-////   backgroundTex.getTexture().setRepeated(true);
-//   return backgroundTex.getTexture();
-   return sf::Texture();
+    (*fontIter).reset(new sf::Font(f));
+    fontIter++;
+  }
 }
 
 /*
@@ -185,46 +113,46 @@ const sf::Texture Controller::createBackgroundTexture()
 */
 void Controller::changeAppState()
 {
-    resetView();
+  resetView();
 
-    switch(mAppStateType)
-    {
-        case AppState::StateType::Menu:
-        {
-            mCurrentAppState = std::unique_ptr<GameState>(new GameState(*this
-                                                                        , mWindow
-                                                                        , mUserName));
-            mAppStateType = AppState::StateType::Game;
-            break;
+  switch (mAppStateType)
+  {
+  case AppState::StateType::Menu:
+  {
+    mCurrentAppState = std::unique_ptr<GameState>(new GameState(*this
+      , mWindow
+      , mUserName));
+    mAppStateType = AppState::StateType::Game;
+    break;
 
-        }
-        case AppState::StateType::Game:
-        {
-            mCurrentAppState = std::unique_ptr<MenuState>(new MenuState(*this
-                                                                        , mWindow));
-            mAppStateType = AppState::StateType::Menu;
-            break;
-        }
-        default: break;
-    }
+  }
+  case AppState::StateType::Game:
+  {
+    mCurrentAppState = std::unique_ptr<MenuState>(new MenuState(*this
+      , mWindow));
+    mAppStateType = AppState::StateType::Menu;
+    break;
+  }
+  default: break;
+  }
 
-    mChangeState = false;
+  mChangeState = false;
 }
 
 void Controller::updateStatistics(sf::Time dt)
 {
-	mStatisticsUpdateTime += dt;
-	mStatisticsNumFrames += 1;
+  mStatisticsUpdateTime += dt;
+  mStatisticsNumFrames += 1;
 
-	if (mStatisticsUpdateTime >= sf::seconds(1.0f))
-	{
-		mStatisticsText.setString(
-			"Frames / Second = " + std::to_string(mStatisticsNumFrames) + "\n" +
-			"Time / Update = " + std::to_string(mStatisticsUpdateTime.asMicroseconds() / mStatisticsNumFrames) + "us");
+  if (mStatisticsUpdateTime >= sf::seconds(1.0f))
+  {
+    mStatisticsText.setString(
+      "Frames / Second = " + std::to_string(mStatisticsNumFrames) + "\n" +
+      "Time / Update = " + std::to_string(mStatisticsUpdateTime.asMicroseconds() / mStatisticsNumFrames) + "us");
 
-		mStatisticsUpdateTime -= sf::seconds(1.0f);
-		mStatisticsNumFrames = 0;
-	}
+    mStatisticsUpdateTime -= sf::seconds(1.0f);
+    mStatisticsNumFrames = 0;
+  }
 }
 
 /*
@@ -232,38 +160,36 @@ void Controller::updateStatistics(sf::Time dt)
 */
 void Controller::run()
 {
-   sf::Time timeSinceLastUpdate = sf::Time::Zero;
+  sf::Time timeSinceLastUpdate = sf::Time::Zero;
 
-   while(mWindow.isOpen())
-   {
-   //        mCountDown -= mClock.restart();
-      sf::Time dt = mClock.restart();
-      timeSinceLastUpdate += dt;
+  while (mWindow.isOpen())
+  {
+    sf::Time dt = mClock.restart();
+    timeSinceLastUpdate += dt;
 
-      while(timeSinceLastUpdate > mFPS)
-      {
-         timeSinceLastUpdate -= mFPS;
+    while (timeSinceLastUpdate > mFPS)
+    {
+      timeSinceLastUpdate -= mFPS;
 
-         mCurrentAppState->handleInput();
-         mCurrentAppState->update(mFPS);
-//         mCountDown = mFPS;
-      }
+      mCurrentAppState->handleInput();
+      mCurrentAppState->update(mFPS);
+    }
 
-      updateStatistics(dt);
+    updateStatistics(dt);
 
-      mWindow.clear();
-      mCurrentAppState->display();
+    mWindow.clear();
+    mCurrentAppState->display();
 
-      sf::View view = mWindow.getView();
-      mStatisticsText.setPosition(view.getCenter().x - (view.getSize().x / 2),
-                                 view.getCenter().y - (view.getSize().y / 2));
-      mWindow.draw(mStatisticsText);
+    sf::View view = mWindow.getView();
+    mStatisticsText.setPosition(view.getCenter().x - (view.getSize().x / 2),
+      view.getCenter().y - (view.getSize().y / 2));
+    mWindow.draw(mStatisticsText);
 
-      mWindow.display();
+    mWindow.display();
 
-      if(mChangeState)
-         changeAppState();
-   }
+    if (mChangeState)
+      changeAppState();
+  }
 }
 
 /*
@@ -271,8 +197,8 @@ void Controller::run()
 */
 void Controller::resetView()
 {
-    sf::View view = mWindow.getView();
-    view.setCenter(mResetViewCenter);
-    mWindow.setView(view);
+  sf::View view = mWindow.getView();
+  view.setCenter(mResetViewCenter);
+  mWindow.setView(view);
 }
 
