@@ -27,11 +27,14 @@ void HUD::draw(sf::RenderTarget& target
     target.draw(mHUDText.at(HUD::DataType::Name));
     target.draw(mHUDText.at(HUD::DataType::Enemy));
     target.draw(mHUDText.at(HUD::DataType::Lives));
+    target.draw(mHUDText.at(HUD::DataType::Score));
 }
 
-void HUD::update(int playerLives)
+void HUD::update(int enemyNum,
+                  int playerLives,
+                 int score)
 {
-    mHUDText.at(HUD::DataType::Enemy).setString("");
+    mHUDText.at(HUD::DataType::Enemy).setString("Enemies: " + std::to_string(enemyNum));
 
 //    int time = static_cast<int>(mWorld->getTimeLeft().asSeconds());
     //int time = static_cast<int>(0.f);
@@ -56,6 +59,9 @@ void HUD::update(int playerLives)
   mHUDText.at(HUD::DataType::Lives).setString("Lives: "
                                               + std::to_string(playerLives));
 
+  mHUDText.at(HUD::DataType::Score).setString("Score: "
+                                              + std::to_string(score));
+
   for(sf::Text& txt : mHUDText)
   {
       sf::FloatRect bounds = txt.getLocalBounds();
@@ -68,15 +74,15 @@ void HUD::setHUDPosition(sf::FloatRect viewBounds)
     mHUDBackground.setPosition(viewBounds.left
                                , viewBounds.top);
 
-    mHUDText.at(HUD::DataType::Name).setPosition(viewBounds.left
-                                                    + (viewBounds.width / 4.f)
+    mHUDText.at(HUD::DataType::Name).setPosition(viewBounds.left + (viewBounds.width / 8.f)
                                                  , viewBounds.top + 10.f);
 
-    mHUDText.at(HUD::DataType::Enemy).setPosition(viewBounds.left
-                                                    + (viewBounds.width / 2.f)
+    mHUDText.at(HUD::DataType::Enemy).setPosition(viewBounds.left + (viewBounds.width / 4.f)
                                                   , viewBounds.top + 10.f);
 
-    mHUDText.at(HUD::DataType::Lives).setPosition(viewBounds.left
-                                                    + (viewBounds.width - (viewBounds.width / 4.f))
+    mHUDText.at(HUD::DataType::Lives).setPosition(viewBounds.left + (viewBounds.width - (viewBounds.width / 4.f))
                                                  , viewBounds.top + 10.f);
+
+    mHUDText.at(HUD::DataType::Score).setPosition(viewBounds.left + (viewBounds.width - (viewBounds.width / 8.f))
+                                                  , viewBounds.top + 10.f);
 }

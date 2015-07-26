@@ -44,8 +44,11 @@ World* world
 void Enemy::updateCurrent(sf::Time dt)
 {
   // Check if entity is dead and needs to be removed
-  if(isDead())
-     mToRemove = true;
+  if (isDead())
+  {
+    mToRemove = true;
+    return;
+  }
 
    mStateMachine.update();
 
@@ -57,23 +60,29 @@ void Enemy::updateCurrent(sf::Time dt)
 
    move(mVelocity);
 
-   // Check if enemy has moved onto trap
-   //std::list<Scenery*> traps;
-   //mQuadTree->retrieveScenery(traps,
-   //                           this,
-   //                           Scenery::Type::Trap);
+    //Check if enemy has moved onto trap
+   std::vector<Scenery*> traps = getObstacles();
 
-   //std::list<Scenery*>::iterator iter;
+   //std::cout << "traps: " << traps.size() << std::endl;
 
-   //for (iter = traps.begin();
-   //  iter != traps.end();
-   //  iter++)
-   //{
-   //  float mag = magVec(getWorldPosition() - (*iter)->getWorldPosition());
+   std::vector<Scenery*>::iterator iter;
 
-   //  if (mag < 10.f)
-   //    decreaseLives();
-   //}
+   for (int i = 0; i < traps.size(); i++)
+   {
+     int mag = magVec(getWorldPosition() - traps.at(i)->getWorldPosition());
+
+     //std::cout << "mag: " << mag << std::endl;
+
+     if(mag < 40.f)
+     {
+       //std::cout << "dead" << std::endl;
+       decreaseLives();
+       mWorld->incEnemiesTrapped();
+       mWorld->decEnemies();
+
+       break;
+     }
+   }
 
    //mBody->SetLinearVelocity(convertVec(mVelocity));
 

@@ -21,41 +21,17 @@ void LookOut::execute(Enemy* host)
 
   if(host->getCurrentStateType() == Enemy::States::Relax)
   {
-    std::list<Entity*> chars;
-
-    //chars = host->getNeighbours();
-
-    //host->getNeighbours(chars
-    //                    , Entity::Type::Adventurer);
-
-    //std::cout << "charSize: " << chars.size() << std::endl;
-
+    Entity* player = host->getCurrentTarget();
     sf::Vector2f hostPos = host->getWorldPosition();
 
-    Entity* closestChar = nullptr;
-    float closestDist = 9999.f;
-
-    // Loop thorugh enemies to find closest
-    for(Entity* e : chars)
+    if (player)
     {
-       sf::Vector2f vecToEnemy = hostPos - e->getWorldPosition();
-       float mag = magVec(vecToEnemy);
+      sf::Vector2f vecToEnemy = hostPos - player->getWorldPosition();
+      float mag = magVec(vecToEnemy);
 
-       if(mag < closestDist)
-       {
-          closestChar = e;
-          closestDist = mag;
-       }
-    }
-
-    // If host target exists set it as target
-    // and change state accordingly to health
-    if(closestChar)
-    {
-      if (closestDist < host->mAggroDistance)
+      if (mag < host->mAggroDistance)
       {
         host->changeState(Enemy::States::Attack);
-        host->setCurrentTarget(closestChar);
       }
     }
 	}
@@ -70,13 +46,13 @@ void Relax::enter(Enemy* host)
 {
     assert(host);
 
-    //if(!host->checkSteeringBehaviour(SteeringBehaviour::Behaviour::Wander))
-    //{
-    //    std::vector<SteeringBehaviour::Behaviour> behaviours;
-    //    behaviours.push_back(SteeringBehaviour::Behaviour::Wander);
+    if(!host->checkSteeringBehaviour(SteeringBehaviour::Behaviour::Rest))
+    {
+        std::vector<SteeringBehaviour::Behaviour> behaviours;
+        behaviours.push_back(SteeringBehaviour::Behaviour::Rest);
 
-    //    host->setSteeringTypes(behaviours);
-    //}
+        host->setSteeringTypes(behaviours);
+    }
 
     host->setText("Grr");
     host->setMaxSpeed(host->getMaxWalkSpeed());
@@ -109,21 +85,23 @@ void Attack::enter(Enemy* host)
 
 void Attack::execute(Enemy* host)
 {
-   Entity* curTarg = host->getCurrentTarget();
+   Entity* player = host->getCurrentTarget();
 //   Adventurer* curTarg = nullptr;
 
 //  std::cout << "Attack execute()" << std::endl;
 
-   if(!curTarg
-     || curTarg->isDead())
+   if(!player
+     || player->isDead())
      host->changeState(Enemy::States::Relax);
 
-   int mag = magVec(host->getWorldPosition() - curTarg->getWorldPosition());
+   int mag = magVec(host->getWorldPosition() - player->getWorldPosition());
 
-   if (mag < 10.f)
+   if (mag < 40.f
+       && !player->hasLostLife())
    {
-     curTarg->decreaseLives();
+     player->decreaseLives();
      host->decreaseLives();
+     host->decEnemies();
    }
    else if(mag < host->mAggroDistance) // If there is current target
    {
@@ -136,7 +114,6 @@ void Attack::execute(Enemy* host)
 
       host->setText("arRRGHHH");
    }
-
    else // If no target
    {
       host->changeState(Enemy::States::Relax);

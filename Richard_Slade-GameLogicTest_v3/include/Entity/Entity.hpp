@@ -181,6 +181,7 @@ public:
 
   void                          setWanderTargetPosition(sf::Vector2f pos) {mWanderTarget.setPosition(pos);}
 
+  void                          decEnemies();
 
    //    void                        setTargetPos(sf::Vector2f pos)
    //                                { mTargetPos = pos; }

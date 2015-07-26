@@ -41,12 +41,12 @@ Controller::Controller()
     mStatisticsText.setString("0.000");
 
     // Initialise menu state
-//    mCurrentAppState = std::unique_ptr<MenuState>(new MenuState(*this,
-//                                                                mWindow));
+    mCurrentAppState = std::unique_ptr<MenuState>(new MenuState(*this,
+                                                                mWindow));
 
-    mCurrentAppState = std::unique_ptr<GameState>(new GameState(*this,
-                                                                mWindow
-                                                                , "Debug"));
+    //mCurrentAppState = std::unique_ptr<GameState>(new GameState(*this,
+    //                                                            mWindow
+    //                                                            , "Debug"));
 };
 
 /*
@@ -69,6 +69,7 @@ void Controller::loadMedia()
     fileNames.push_back("media/textures/brickLargeBorder.png");
     fileNames.push_back("media/textures/stoneLarge.png");
     fileNames.push_back("media/textures/barrel.png");
+    fileNames.push_back("media/textures/background.png");
 
    assert(mTextures.size() >= fileNames.size());
 

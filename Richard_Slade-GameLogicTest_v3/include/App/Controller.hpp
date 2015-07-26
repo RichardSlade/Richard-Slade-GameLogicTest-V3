@@ -46,6 +46,7 @@ public:
         Brick,
         Stone,
         Trap,
+        Background,
 //        Ground,
         NumTextures
     };

@@ -14,7 +14,6 @@ Scenery::Scenery(const sf::Texture& texture,
 {
   sf::FloatRect bounds = mSprite.getLocalBounds();
   mSprite.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
-  mSprite.setPosition(pos);
   sf::Transformable::setPosition(pos);
 	mRadius = std::sqrt((mSprite.getLocalBounds().width * mSprite.getLocalBounds().width) 
                        + (mSprite.getLocalBounds().height * mSprite.getLocalBounds().height));
@@ -29,7 +28,6 @@ Scenery::Scenery(const sf::Texture& texture,
 {
   sf::FloatRect bounds = mSprite.getLocalBounds();
   mSprite.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
-  mSprite.setPosition(pos);
   sf::Transformable::setPosition(pos);
   mRadius = radius;
 };
@@ -44,7 +42,7 @@ Scenery::Scenery(const sf::Texture& texture,
 
 void Scenery::updateCurrent(sf::Time dt)
 {
-  //sf::Transformable::setPosition(getWorldPosition());  
+  sf::Transformable::setPosition(getWorldPosition());  
 }
 
 void Scenery::drawCurrent(sf::RenderTarget& target,

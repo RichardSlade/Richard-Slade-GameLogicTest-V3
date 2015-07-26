@@ -11,7 +11,7 @@
 //#include <SFML/System/NonCopyable.hpp>
 
 //#include "World/Level.hpp"
-#include "World/QuadTree.hpp"
+//#include "World/QuadTree.hpp"
 #include "SceneNode/SceneNode.hpp"
 #include "Entity/Enemy.hpp"
 #include "Entity/Adventurer.hpp"
@@ -52,9 +52,10 @@ private:
    //const int32                                  mVelocityIter;
    //const int32                                  mPositionIter;
    //const float32                                mTimeStep;
-   const unsigned int                             mLevelBlockX;
-   const unsigned int                            mLevelBlockY;
-   const unsigned int                           mLevelBlockSize;
+   const  int                             mLevelBlockX;
+   const  int                            mLevelBlockY;
+   const  int                           mLevelBlockSize;
+   const unsigned int                           mSpacing;
 
    const float                                  mWaypointRadius;
    const float                                  mScrollSpeed;
@@ -66,7 +67,7 @@ private:
    sf::View                                     mWorldView;
 //   sf::RectangleShape                           mWorldRect;
    sf::Vector2f                                 mFocusPoint;
-   QuadTree::upQuadTree                         mQuadTree;
+   //QuadTree::upQuadTree                         mQuadTree;
 
    std::vector<std::vector<Scenery*>>           mObstacles;
 
@@ -110,13 +111,14 @@ public:
                                                       , sf::RenderWindow&
                                                       , std::string
                                                       , int worldDim
-                                                      , int numEnemy
-                                                      , sf::Time levelTime);
+                                                      , int numEnemy);
 
     void                                        update(sf::Time);
     //void                                        updatePhysicsEngine();
     void                                        handleInput();
     void                                        display();
+
+    void                                          regenWorld(const Controller& controller);
 
     // Getters
    const sf::FloatRect                          getViewBounds() const;
@@ -124,6 +126,10 @@ public:
    std::vector<Scenery*>                        getObstacles(sf::Vector2f pos);
 
     const sf::FloatRect                          getWorldBounds() const { return mWorldBounds; }
+
+    // Setters
+    void                                         incEnemiesTrapped();
+    void                                         decEnemies();
 };
 
 #endif // WORLD_HPP

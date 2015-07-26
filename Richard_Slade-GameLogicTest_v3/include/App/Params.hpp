@@ -30,11 +30,11 @@ public:
     float LevelBlockX;
     float LevelBlockY;
     float LevelBlockSize;
-    float WorldDimMin;
-    float WorldDimMax;
+    //float WorldDimMin;
+    //float WorldDimMax;
     float NumEnemy;
-    float LevelTimeMin;
-    float LevelTimeMax;
+    //float LevelTimeMin;
+    //float LevelTimeMax;
     float WaypointRadius;
     float ScrollSpeed;
     float EnemySightRange;
@@ -81,20 +81,20 @@ public:
         in.ignore(255, ' ');
         in >> params.LevelBlockSize;
 
-        in.ignore(255, ' ');
-        in >> params.WorldDimMin;
+        //in.ignore(255, ' ');
+        //in >> params.WorldDimMin;
 
-        in.ignore(255, ' ');
-        in >> params.WorldDimMax;
+        //in.ignore(255, ' ');
+        //in >> params.WorldDimMax;
 
         in.ignore(255, ' ');
         in >> params.NumEnemy;
 
-        in.ignore(255, ' ');
-        in >> params.LevelTimeMin;
+        //in.ignore(255, ' ');
+        //in >> params.LevelTimeMin;
 
-        in.ignore(255, ' ');
-        in >> params.LevelTimeMax;
+        //in.ignore(255, ' ');
+        //in >> params.LevelTimeMax;
 
         in.ignore(255, ' ');
         in >> params.WaypointRadius;

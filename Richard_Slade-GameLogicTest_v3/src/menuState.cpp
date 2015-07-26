@@ -5,8 +5,8 @@
 #include "World/World.hpp"
 
 const int MenuState::mMaxTextNum = 4;
-const sf::Color MenuState::mSelectedTextColour = sf::Color::White;
-const sf::Color MenuState::mOtherTextColour = sf::Color(255, 255, 255, 125);
+const sf::Color MenuState::mSelectedTextColour = sf::Color::Blue;
+const sf::Color MenuState::mOtherTextColour = sf::Color(0, 0, 255, 125);
 
 MenuState::MenuState(Controller& cntrl
                      , sf::RenderWindow& window)
@@ -16,9 +16,9 @@ MenuState::MenuState(Controller& cntrl
                , mViewCenter.y + 64)
 , mController(cntrl)
 , mWindow(window)
-, mBackground(cntrl.getTexture(Controller::Textures::Brick)
+, mBackground(cntrl.getTexture(Controller::Textures::Background)
                     , mWindow.getViewport(mView))
-, mTitleText("RPG"
+, mTitleText("Trapper"
              , mController.getFont(Controller::Fonts::Sansation)
              , 128)
 , mCurrentMenu(MenuState::MenuType::Main)

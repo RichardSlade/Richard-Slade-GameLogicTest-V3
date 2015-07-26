@@ -7,24 +7,23 @@
 GameState::GameState(Controller& cntrl
                      , sf::RenderWindow& window
                      , std::string username)
-: mWorldDimMax(cntrl.getParams().WorldDimMax)
-, mNumEnemy(cntrl.getParams().NumEnemy)
-, mLevelTimeMin(cntrl.getParams().LevelTimeMin)
-, mResetWorldDim(cntrl.getParams().WorldDimMax)
-, mResetLevelTime(cntrl.getParams().LevelTimeMax)
+: mResetNumEnemy(cntrl.getParams().NumEnemy)
+//, mLevelTimeMin(cntrl.getParams().LevelTimeMin)
+//, mResetLevelTime(cntrl.getParams().LevelTimeMax)
+, mNumEnemy(mResetNumEnemy)
+, mTotalEnemiesTrapped(0)
 , mController(cntrl)
 , mWindow(window)
-, mWorldDim(mResetWorldDim)
-, mLevelTime(sf::seconds(mResetLevelTime * 60.f))
-, mTotalEnemyHerded(0)
+, mWorldDim(cntrl.getParams().LevelBlockSize * cntrl.getParams().LevelBlockX)
+//, mLevelTime(sf::seconds(mResetLevelTime * 60.f))
+
 , mUsername(username)
 , mWorld(new World(*this
                    , cntrl
                    , window
                    , "Debug"
                    , mWorldDim
-                   , mNumEnemy
-                   , mLevelTime))
+                   , mNumEnemy))
 , mPausedScreen(mController
                 , *this
                 , mWindow)
@@ -48,8 +47,7 @@ void GameState::restartWorld()
                                               , mWindow
                                               , mUsername
                                               , mWorldDim
-                                              , mNumEnemy
-                                              , mLevelTime));
+                                              , mResetNumEnemy));
 
     mNewScreen = GameState::Screen::Game;
 }
@@ -120,40 +118,28 @@ void GameState::pause()
 
 void GameState::levelComplete()
 {
-    mNewScreen = GameState::Screen::LevelComplete;
-    mLevelCompleteScreen.setup(mWindow.getView());
+  quitGameState();
 }
 
 void GameState::gameComplete(int sheepFromLastLevel)
 {
-    mNewScreen = GameState::Screen::GameComplete;
+  quitGameState();
+    //mNewScreen = GameState::Screen::GameComplete;
 
-    mGameCompleteScreen.setup(mWindow.getView(), mTotalEnemyHerded + sheepFromLastLevel);
+    //mGameCompleteScreen.setup(mWindow.getView(), mTotalEnemiesTrapped + sheepFromLastLevel);
 }
 
 void GameState::nextLevel()
 {
-//    const float blockSize = mController.getParams().LevelBlockSize;
-
-//    mWorldDim += blockSize * 4;
-//    mNumEnemy += 10;
-//    mLevelTime -= mWorld->getTimeTaken();
-//    mLevelTime += sf::seconds(mLevelTimeMin * 60.f);
-
-//    mTotalEnemyHerded += mWorld->getEnemyHerded();
-
-//    if(mWorldDim > mWorldDimMax)
-//        mWorldDim = mWorldDimMax;
-
-    restartWorld();
+  quitGameState();
 }
 
 void GameState::resetGame()
 {
-    mWorldDim = mResetWorldDim;
-    mLevelTime = sf::seconds(mResetLevelTime * 60.f);
+    //mWorldDim = mResetWorldDim;
+    //mLevelTime = sf::seconds(mResetLevelTime * 60.f);
 
-    mTotalEnemyHerded = 0;
+    mTotalEnemiesTrapped = 0;
 
     restartWorld();
 }

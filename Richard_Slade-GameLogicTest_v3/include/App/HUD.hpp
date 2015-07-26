@@ -17,6 +17,7 @@ public:
         Name,
         Enemy,
         Lives,
+        Score,
         NumDataType
     };
 
@@ -42,7 +43,9 @@ public:
 
     virtual                                 ~HUD(){};
 
-    void                                    update(int playerLives);
+    void                                    update(int enemyNum,
+                                                    int playerLives,
+                                                   int score);
 
     // Setters
     void                                    setHUDPosition(sf::FloatRect);

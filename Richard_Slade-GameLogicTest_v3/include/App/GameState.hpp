@@ -26,19 +26,22 @@ private:
         GameComplete
     };
 
-    const int                       mWorldDimMax;
-    const int                       mNumEnemy;
-    const float                     mLevelTimeMin;
+    //const int                       mWorldDimMax;
+    const int                       mResetNumEnemy;
+    //const float                     mLevelTimeMin;
 
-    const int                       mResetWorldDim;
-    const float                     mResetLevelTime;
+    //const int                       mResetWorldDim;
+    //const float                     mResetLevelTime;
+
+    int                   mNumEnemy;
+    int                           mTotalEnemiesTrapped;
 
     Controller&                     mController;
     sf::RenderWindow&               mWindow;
 
     float                           mWorldDim;
     sf::Time                        mLevelTime;
-    float                           mTotalEnemyHerded;
+
 
     std::string                     mUsername;
 
@@ -76,7 +79,12 @@ public:
 
     // Getters
     bool                            getPaused(){ return mPaused; }
-    unsigned int                    getNumEnemy(){ return mNumEnemy; }
+    int                    getNumEnemy(){ return mNumEnemy; }
+    int                    getTotalEnemiesTrapped() { return mTotalEnemiesTrapped; }
+
+    // Setters
+    void                            incEnemiesTrapped(){ mTotalEnemiesTrapped++; }
+    void                            decEnemies() { mNumEnemy--; }
 };
 
 #endif // GAMESTATE_HPP

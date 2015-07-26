@@ -102,6 +102,20 @@ void Adventurer::updateCurrent(sf::Time dt)
 
   // truncateVec(mVelocity, mMaxSpeed);
   move(mVelocity);
+
+  std::vector<Scenery*> obstacles = getObstacles();
+
+  for (int i = 0; i < obstacles.size(); i++)
+  {
+    float mag = magVec(getWorldPosition() - obstacles.at(i)->getWorldPosition());
+
+    if (mag < 40.f)
+    { 
+      move((getWorldPosition() - obstacles.at(i)->getWorldPosition()) * 0.1f);
+      break;
+    }
+  }
+
   //move(sf::Vector2f(1, 1));
 
   //adjustPosition();
@@ -113,6 +127,9 @@ void Adventurer::updateCurrent(sf::Time dt)
   //float angle = std::atan2(toCursor.x, -toCursor.y);
 
   //sf::Transformable::rotate(radianToDegree(angle));
+
+  //std::cout << getWorldPosition().x / 40 << ", " << getWorldPosition().y / 40 << std::endl;
+  //std::cout << getObstacles().size() << std::endl;
 
   Entity::updateCurrent(dt);
 }

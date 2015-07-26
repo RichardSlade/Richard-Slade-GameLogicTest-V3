@@ -21,15 +21,6 @@
     <ClInclude Include="include\SceneNode\SpriteNode.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\World\Level.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\World\LevelBlock.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\World\QuadTree.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\World\Scenery.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -125,12 +116,6 @@
     <ClCompile Include="src\hud.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\level.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\levelBlock.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\levelCompleteScreen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -144,9 +129,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\pausedScreen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\quadTree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\sceneNode.cpp">

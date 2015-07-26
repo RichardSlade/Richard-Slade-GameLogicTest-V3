@@ -33,9 +33,6 @@
     <ClInclude Include="include\Entity\SteeringBehaviour.hpp" />
     <ClInclude Include="include\SceneNode\SceneNode.hpp" />
     <ClInclude Include="include\SceneNode\SpriteNode.hpp" />
-    <ClInclude Include="include\World\Level.hpp" />
-    <ClInclude Include="include\World\LevelBlock.hpp" />
-    <ClInclude Include="include\World\QuadTree.hpp" />
     <ClInclude Include="include\World\Scenery.hpp" />
     <ClInclude Include="include\World\WallBlock.hpp" />
     <ClInclude Include="include\World\World.hpp" />
@@ -49,14 +46,11 @@
     <ClCompile Include="src\gameCompleteScreen.cpp" />
     <ClCompile Include="src\gameState.cpp" />
     <ClCompile Include="src\hud.cpp" />
-    <ClCompile Include="src\level.cpp" />
-    <ClCompile Include="src\levelBlock.cpp" />
     <ClCompile Include="src\levelCompleteScreen.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\menuState.cpp" />
     <ClCompile Include="src\path.cpp" />
     <ClCompile Include="src\pausedScreen.cpp" />
-    <ClCompile Include="src\quadTree.cpp" />
     <ClCompile Include="src\sceneNode.cpp" />
     <ClCompile Include="src\scenery.cpp" />
     <ClCompile Include="src\spriteNode.cpp" />

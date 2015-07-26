@@ -3,11 +3,7 @@ WindowY 720
 LevelBlockX 64
 LevelBlockY 64
 LevelBlockSize 40
-WorldDimMin 2560
-WorldDimMax 2560
 NumEnemy 8
-LevelTimeMin 0.5
-LevelTimeMax 2
 WaypointRadius 10
 ScrollSpeed 10
 EnemySightRange 250

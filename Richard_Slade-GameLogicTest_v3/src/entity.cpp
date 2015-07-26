@@ -37,6 +37,7 @@ Entity::Entity(//Level* level
 , mCurrentTarget(nullptr)
 , mText(".....", font, 12)
 , mWanderTarget(5.f)
+, mRadius(20.f)
 //, mOrigin(5.f)
 {
 //  mWanderTarget.setPosition(sf::Vector2f(500.f, 500.f));
@@ -51,6 +52,8 @@ Entity::Entity(//Level* level
   mWanderTarget.setFillColor(sf::Color::Magenta);
   bounds = mWanderTarget.getLocalBounds();
   mWanderTarget.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
+
+  adjustPosition();
 
   //mOrigin.setFillColor(sf::Color::Green);
   //bounds = mOrigin.getLocalBounds();
@@ -108,19 +111,20 @@ void Entity::drawCurrent(sf::RenderTarget& target
 }
 
 
-//void Entity::adjustPosition()
-//{
-//    sf::IntRect worldBounds = mLevel->getWorldBounds();
-//
-//    sf::Vector2f pos = getWorldPosition();
-//
-//    pos.x = std::min(pos.x, static_cast<float>(worldBounds.width));
-//    pos.x = std::max(pos.x, 0.f);
-//    pos.y = std::min(pos.y, static_cast<float>(worldBounds.height));
-//    pos.y = std::max(pos.y, 0.f);
-//
-//    setPosition(pos);
-//}
+void Entity::adjustPosition()
+{
+    //sf::IntRect worldBounds = mLevel->getWorldBounds();
+
+  sf::FloatRect worldBounds = mWorld->getWorldBounds();
+    sf::Vector2f pos = getWorldPosition();
+
+    pos.x = std::min(pos.x, static_cast<float>(worldBounds.width));
+    pos.x = std::max(pos.x, 0.f);
+    pos.y = std::min(pos.y, static_cast<float>(worldBounds.height));
+    pos.y = std::max(pos.y, 0.f);
+
+    setPosition(pos);
+}
 
 void Entity::ensureZeroOverlap()
 {
@@ -172,6 +176,11 @@ void Entity::ensureZeroOverlap()
 std::vector<Scenery*> Entity::getObstacles() const
 {
   return mWorld->getObstacles(getWorldPosition());
+}
+
+void Entity::decEnemies()
+{ 
+  mWorld->decEnemies(); 
 }
 
 //void Entity::addToQuadTree(QuadTree* quadTree)
