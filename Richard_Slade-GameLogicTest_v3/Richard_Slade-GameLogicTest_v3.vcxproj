@@ -96,12 +96,12 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include;E:\libraries\SFML-2.3.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>SFML-2.3.1\include;include;E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include;E:\libraries\SFML-2.3.1\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>E:\libraries\SFML-2.3.1\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>SFML-2.3.1\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -115,14 +115,14 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include;E:\libraries\SFML-2.3.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>SFML-2.3.1\include;include;include;SFML-2.3.1\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>E:\libraries\SFML-2.3.1\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>SFML-2.3.1\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

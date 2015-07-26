@@ -200,14 +200,16 @@ void World::update(sf::Time dt)
               mGameState.getScore());
 
   // game ending scenarios
-  if (mGameState.getNumEnemy() <= 0)
-  {
-    mGameState.levelComplete();
-  }
-  else if(mCurrentAdventurer->getLives() <= 0)
+  if ((mGameState.getNumEnemy() <= 0 && mCurrentAdventurer->getLives() <= 0)
+      || mCurrentAdventurer->getLives() <= 0)
   {
     mGameState.gameOver();
   }
+  else if(mGameState.getNumEnemy() <= 0)
+  {
+    mGameState.levelComplete();
+  }
+
 }
 
 void World::handleInput()
