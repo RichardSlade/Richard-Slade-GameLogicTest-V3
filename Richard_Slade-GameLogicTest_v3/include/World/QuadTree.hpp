@@ -29,7 +29,7 @@ public:
 
 private:
   const int                             mMaxObjects = 20;
-  const int                             mMaxLevels = 5;
+  const int                             mMaxLevels = 1;
 
   int                                   mLevel;
   std::list<Scenery*>                   mScenery;

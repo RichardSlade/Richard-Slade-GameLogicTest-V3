@@ -5,9 +5,12 @@
 #include "App/Utility.hpp"
 #include "World/World.hpp"
 #include "Entity/Enemy.hpp"
+#include "Entity\Adventurer.hpp"
 
-Enemy::Enemy(QuadTree* quadTree
+Enemy::Enemy(//QuadTree* quadTree
 //Level* level
+World* world
+//, Adventurer* adventurer
 , const sf::Texture& texture
 , const sf::Font& font
 , sf::Vector2f pos
@@ -18,7 +21,8 @@ Enemy::Enemy(QuadTree* quadTree
 , StateContainer& states
 , unsigned int currentState
 , float scale)
-: Entity(quadTree
+: Entity(//quadTree
+          world
          , texture
          , font
          , pos

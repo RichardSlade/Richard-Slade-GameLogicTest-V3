@@ -6,6 +6,8 @@
 #include "Entity/Entity.hpp"
 #include "Entity/State/StateMachine.hpp"
 
+class Adventurer;
+
 class Enemy : public Entity
 {
 public:
@@ -31,7 +33,7 @@ private:
     StateContainer&             mStates;
     StateMachine<Enemy>         mStateMachine;
 
-//    Entity*                      mCurrentTarget;
+    //Adventurer*                mAdventurerTarget;
 
 
     virtual void                updateCurrent(sf::Time);
@@ -39,8 +41,10 @@ private:
                                             , sf::RenderStates) const;
 
 public:
-                                Enemy(QuadTree* quadTree
+                                Enemy(//QuadTree* quadTree
                                        //Level* level
+                                       World* world
+                                       //, Adventurer* player
                                       , const sf::Texture&
                                       , const sf::Font&
                                       , sf::Vector2f

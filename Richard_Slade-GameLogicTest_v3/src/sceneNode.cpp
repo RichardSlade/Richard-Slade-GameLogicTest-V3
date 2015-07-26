@@ -24,11 +24,11 @@ void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	drawChildren(target, states);
 }
 
-void SceneNode::addToQuadTree(QuadTree* quadTree)
-{
-  for(upScNode& node : mChildren)
-    node->addToQuadTree(quadTree);
-}
+//void SceneNode::addToQuadTree(QuadTree* quadTree)
+//{
+//  for(upScNode& node : mChildren)
+//    node->addToQuadTree(quadTree);
+//}
 
 void SceneNode::updateChildren(sf::Time dt)
 {

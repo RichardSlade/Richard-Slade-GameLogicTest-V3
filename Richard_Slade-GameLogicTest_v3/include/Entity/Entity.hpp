@@ -18,7 +18,8 @@
 #include "Entity/Attribute/Killable.hpp"
 //#include "MovingTarget.hpp"
 
-class QuadTree;
+//class QuadTree;
+class World;
 //class Scenery;
 
 class Entity : public SceneNode, public Killable
@@ -35,7 +36,8 @@ public:
 
 protected:
     //Level*                      mLevel;
-    QuadTree*                   mQuadTree;
+    //QuadTree*                   mQuadTree;
+  World*                      mWorld;
 
   const float                 mMass;
   const float                 mWalkMaxSpeed;
@@ -70,7 +72,8 @@ protected:
   void                        ensureZeroOverlap();
 
 public:
-                                Entity(QuadTree*
+                                Entity(World* world
+                                  //QuadTree*
                                       //Level*
                                        , const sf::Texture&
                                        , const sf::Font&
@@ -82,17 +85,17 @@ public:
 
     virtual                     ~Entity(){};
 
-    virtual void                addToQuadTree(QuadTree* quadTree);
+    //virtual void                addToQuadTree(QuadTree* quadTree);
 
     // Getters
-    std::list<Entity*>&          getNeighbours(std::list<Entity*>& returnList,
-                                              Entity::Type type) const;
+    //std::list<Entity*>&          getNeighbours(std::list<Entity*>& returnList,
+    //                                          Entity::Type type) const;
 
-    std::list<Scenery*>&         getObstacles(std::list<Scenery*>& returnList,
-                                              Scenery::Type type) const;
+    //std::list<Scenery*>&         getObstacles(std::list<Scenery*>& returnList,
+    //                                          Scenery::Type type) const;
 
     //std::list<Entity*>            getNeighbours() const;
-    //std::list<Scenery*>           getObstacles() const;
+    std::vector<Scenery*>           getObstacles() const;
 
 
 //    std::vector<LevelBlock*>    getBlockTypeInRange(LevelBlock::Type, float) const;

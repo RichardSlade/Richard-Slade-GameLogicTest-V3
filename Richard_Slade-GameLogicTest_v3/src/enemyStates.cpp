@@ -25,8 +25,8 @@ void LookOut::execute(Enemy* host)
 
     //chars = host->getNeighbours();
 
-    host->getNeighbours(chars
-                        , Entity::Type::Adventurer);
+    //host->getNeighbours(chars
+    //                    , Entity::Type::Adventurer);
 
     //std::cout << "charSize: " << chars.size() << std::endl;
 
@@ -70,13 +70,13 @@ void Relax::enter(Enemy* host)
 {
     assert(host);
 
-    if(!host->checkSteeringBehaviour(SteeringBehaviour::Behaviour::Wander))
-    {
-        std::vector<SteeringBehaviour::Behaviour> behaviours;
-        behaviours.push_back(SteeringBehaviour::Behaviour::Wander);
+    //if(!host->checkSteeringBehaviour(SteeringBehaviour::Behaviour::Wander))
+    //{
+    //    std::vector<SteeringBehaviour::Behaviour> behaviours;
+    //    behaviours.push_back(SteeringBehaviour::Behaviour::Wander);
 
-        host->setSteeringTypes(behaviours);
-    }
+    //    host->setSteeringTypes(behaviours);
+    //}
 
     host->setText("Grr");
     host->setMaxSpeed(host->getMaxWalkSpeed());

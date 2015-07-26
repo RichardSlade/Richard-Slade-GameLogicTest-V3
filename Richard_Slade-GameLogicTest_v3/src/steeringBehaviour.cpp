@@ -43,8 +43,8 @@ SteeringBehaviour::SteeringBehaviour(Entity* host
      b = false;
 
     mBehaviourFlags.at(SteeringBehaviour::ObstacleAvoidance) = true;
-    mBehaviourFlags.at(SteeringBehaviour::WallAvoidance) = true;
-    mBehaviourFlags.at(SteeringBehaviour::Seperation) = true;
+    //mBehaviourFlags.at(SteeringBehaviour::WallAvoidance) = true;
+    //mBehaviourFlags.at(SteeringBehaviour::Seperation) = true;
 
 //   if(mHost->getEntityType() != Entity::Type::Adventurer)
 //      mBehaviourFlags.at(SteeringBehaviour::Seperation) = true;
@@ -138,41 +138,41 @@ sf::Vector2f SteeringBehaviour::seek(sf::Vector2f target){
     return (desiredVelocity - mHost->getVelocity());
 }
 
-sf::Vector2f SteeringBehaviour::wander(sf::Time dt){
-  float jitterTimeSlice = mWanderJitter * dt.asSeconds();
-
-  float jitter1 = rangedClamped(-1.f, 1.f) * jitterTimeSlice;
-  float jitter2 = rangedClamped(-1.f, 1.f) * jitterTimeSlice;
-
-  mWanderTarget += sf::Vector2f(jitter1
-                                , jitter2);
-
-//   mWanderTarget += sf::Vector2f(0.f
-//                                  , 0.f);
-
-  mWanderTarget = normVec(mWanderTarget);
-  mWanderTarget *= mWanderRadius;
-//  mWanderTarget.y *= -1.f;
-
-
-//  sf::Vector2f targetLocal = mWanderTarget;// + sf::Vector2f(0.f, -mWanderDistance);
-  sf::Vector2f targetLocal = mWanderTarget + sf::Vector2f(0.f, -mWanderDistance);
-//  sf::Vector2f targetLocal(0.f, 0.f);// + sf::Vector2f(0.f, -mWanderDistance);
-//  sf::Vector2f targetLocal = sf::Vector2f(0.f, -mWanderDistance);
-//  sf::Vector2f targetLocal = sf::Vector2f(1.f, -1.f);
-//  sf::Vector2f targetWorld = mHost->getWorldTransform() * targetLocal;
-  sf::Vector2f targetWorld = mHost->getWorldTransform().transformPoint(targetLocal);
-
-//    sf::Vector2f returnVec(targetWorld - mHost->getWorldPosition());
-
-//  mHost->setWanderTargetPosition(sf::Vector2f(0.f, -mWanderDistance));
-//  mHost->setWanderTargetPosition(meterToPixel(targetWorld));
-//  mHost->setWanderTargetPosition(meterToPixel(targetWorld));
-  mHost->setWanderTargetPosition(targetWorld);
-
-  return sf::Vector2f(targetWorld - mHost->getWorldPosition());
-//  return sf::Vector2f();
-}
+//sf::Vector2f SteeringBehaviour::wander(sf::Time dt){
+//  float jitterTimeSlice = mWanderJitter * dt.asSeconds();
+//
+//  float jitter1 = rangedClamped(-1.f, 1.f) * jitterTimeSlice;
+//  float jitter2 = rangedClamped(-1.f, 1.f) * jitterTimeSlice;
+//
+//  mWanderTarget += sf::Vector2f(jitter1
+//                                , jitter2);
+//
+////   mWanderTarget += sf::Vector2f(0.f
+////                                  , 0.f);
+//
+//  mWanderTarget = normVec(mWanderTarget);
+//  mWanderTarget *= mWanderRadius;
+////  mWanderTarget.y *= -1.f;
+//
+//
+////  sf::Vector2f targetLocal = mWanderTarget;// + sf::Vector2f(0.f, -mWanderDistance);
+//  sf::Vector2f targetLocal = mWanderTarget + sf::Vector2f(0.f, -mWanderDistance);
+////  sf::Vector2f targetLocal(0.f, 0.f);// + sf::Vector2f(0.f, -mWanderDistance);
+////  sf::Vector2f targetLocal = sf::Vector2f(0.f, -mWanderDistance);
+////  sf::Vector2f targetLocal = sf::Vector2f(1.f, -1.f);
+////  sf::Vector2f targetWorld = mHost->getWorldTransform() * targetLocal;
+//  sf::Vector2f targetWorld = mHost->getWorldTransform().transformPoint(targetLocal);
+//
+////    sf::Vector2f returnVec(targetWorld - mHost->getWorldPosition());
+//
+////  mHost->setWanderTargetPosition(sf::Vector2f(0.f, -mWanderDistance));
+////  mHost->setWanderTargetPosition(meterToPixel(targetWorld));
+////  mHost->setWanderTargetPosition(meterToPixel(targetWorld));
+//  mHost->setWanderTargetPosition(targetWorld);
+//
+//  return sf::Vector2f(targetWorld - mHost->getWorldPosition());
+////  return sf::Vector2f();
+//}
 
 sf::Vector2f SteeringBehaviour::followPath(){
     if(mPath.isActive())
@@ -211,11 +211,11 @@ sf::Vector2f SteeringBehaviour::obstacleAvoidance(){
                 + (mHost->getSpeed() / mHost->getMaxSpeed())
                 * mMinViewBoxLength;
 
-  std::list<Scenery*> obstacles;
-  mHost->getObstacles(obstacles,
-                    Scenery::Type::Trap);
+  std::vector<Scenery*> obstacles;
+  //mHost->getObstacles(obstacles,
+  //                  Scenery::Type::Trap);
 
-  //obstacles = mHost->getObstacles();
+  obstacles = mHost->getObstacles();
 
 //std::cout << obstacles.size() << std::endl;
 
@@ -226,7 +226,7 @@ sf::Vector2f SteeringBehaviour::obstacleAvoidance(){
   //    sf::Transform hostTrans = mHost->getInverseTransform();
   sf::Transform hostTrans = mHost->getWorldTransform().getInverse();
 
-  std::list<Scenery*>::iterator iter;
+  std::vector<Scenery*>::iterator iter;
 
   for(iter = obstacles.begin();
     iter != obstacles.end();
@@ -278,181 +278,181 @@ sf::Vector2f SteeringBehaviour::obstacleAvoidance(){
   return worldForce - mHost->getWorldPosition();
 }
 
-sf::Vector2f SteeringBehaviour::wallAvoidance(){
-    createFeelers();
-    sf::Vector2f steeringForce, point, closestPoint, closestNorm;
-
-    std::list<Scenery*> walls;
-    mHost->getObstacles(walls, Scenery::Type::Wall);
-    //walls = mHost->getObstacles();
-
-    sf::Vector2f closestFeeler, closestIntersection;
-    float closestFraction = 1.f;
-    bool intersectionOccured = false;
-
-    for(size_t flr = 0; flr < SteeringBehaviour::Feelers::NumFlr; flr++)
-    {
-      int closestWall = -1;
-      int index = 0;
-
-      std::list<Scenery*>::iterator itrScenery;
-      
-      for(itrScenery = walls.begin();
-          itrScenery != walls.end();
-          itrScenery++)
-      {
-        //if (lineIntersection2D(mHost->getWorldPosition()
-        //  , mHost->getWorldTransform() * mFeelers.at(flr)
-        //  , wallData.first.first
-        //  , wallData.first.second
-        //  , distToThisIntersection
-        //  , point))
-        //{
-
-        //  if (distToThisIntersection < distToClosestIntersection)
-        //  {
-        //    distToClosestIntersection = distToThisIntersection;
-        //    closestWall = index;
-        //    closestPoint = point;
-        //    closestNorm = wallData.second;
-        //  }
-        //}
-
-        index++;
-      }
-
-      if (closestWall >= 0)
-      {
-        sf::Vector2f overShoot = (mHost->getWorldTransform() * mFeelers.at(flr)) - closestPoint;
-        steeringForce = closestNorm * magVec(overShoot);
-      }
-
-
-//        std::list<Scenery*>::iterator itrScenery;
+//sf::Vector2f SteeringBehaviour::wallAvoidance(){
+//    createFeelers();
+//    sf::Vector2f steeringForce, point, closestPoint, closestNorm;
 //
-//        for(itrScenery = walls.begin();
-//            itrScenery != walls.end();
-//            itrScenery++)
+//    std::list<Scenery*> walls;
+//    mHost->getObstacles(walls, Scenery::Type::Wall);
+//    //walls = mHost->getObstacles();
+//
+//    sf::Vector2f closestFeeler, closestIntersection;
+//    float closestFraction = 1.f;
+//    bool intersectionOccured = false;
+//
+//    for(size_t flr = 0; flr < SteeringBehaviour::Feelers::NumFlr; flr++)
+//    {
+//      int closestWall = -1;
+//      int index = 0;
+//
+//      std::list<Scenery*>::iterator itrScenery;
+//      
+//      for(itrScenery = walls.begin();
+//          itrScenery != walls.end();
+//          itrScenery++)
+//      {
+//        //if (lineIntersection2D(mHost->getWorldPosition()
+//        //  , mHost->getWorldTransform() * mFeelers.at(flr)
+//        //  , wallData.first.first
+//        //  , wallData.first.second
+//        //  , distToThisIntersection
+//        //  , point))
+//        //{
+//
+//        //  if (distToThisIntersection < distToClosestIntersection)
+//        //  {
+//        //    distToClosestIntersection = distToThisIntersection;
+//        //    closestWall = index;
+//        //    closestPoint = point;
+//        //    closestNorm = wallData.second;
+//        //  }
+//        //}
+//
+//        index++;
+//      }
+//
+//      if (closestWall >= 0)
+//      {
+//        sf::Vector2f overShoot = (mHost->getWorldTransform() * mFeelers.at(flr)) - closestPoint;
+//        steeringForce = closestNorm * magVec(overShoot);
+//      }
+//
+//
+////        std::list<Scenery*>::iterator itrScenery;
+////
+////        for(itrScenery = walls.begin();
+////            itrScenery != walls.end();
+////            itrScenery++)
+////        {
+////            //const b2Fixture* fixture = (*itrScenery)->getFixtures();
+////
+////            sf::Vector2f p1(mHost->getWorldPosition());
+////            sf::Vector2f p2(mHost->getWorldTransform() * mFeelers.at(flr));
+////
+////            //b2RayCastInput input;
+////            //input.p1 = convertVec(p1);
+////            //input.p2 = convertVec(p2);
+////            //input.maxFraction = 1.f;
+////
+////            //b2RayCastOutput output;
+////
+////            //if(!fixture->RayCast(&output, input, 0))
+////            //  continue;
+////            //if(output.fraction < closestFraction)
+////            //{
+////            //  closestFraction = output.fraction;
+////            //  closestFeeler = p2;
+////            //  closestIntersection = p1 + closestFraction * (p2 - p1);
+////            //  closestNorm = convertVec(output.normal);
+////            //  intersectionOccured = true;
+////            //}
+////        }
+////
+////        if(intersectionOccured)
+////        {
+//////          std::cout << "Intersection occured " << closestNorm.x << "," << closestNorm.y << std::endl;
+////
+////            sf::Vector2f overShoot = closestFeeler - closestIntersection;
+////            steeringForce = closestNorm * magVec(overShoot);
+////        }
+//    }
+//
+//    return steeringForce;
+//}
+
+//sf::Vector2f SteeringBehaviour::seperation(){
+//    sf::Vector2f steeringForce;
+//
+//    std::list<Entity*> neighbours;
+//     mHost->getNeighbours(neighbours
+//                          , Entity::Type::AllTypes);
+//
+//    //neighbours = mHost->getNeighbours();
+//
+//    for(Entity* e : neighbours)
+//    {
+//        sf::Vector2f toNeighbour = mHost->getWorldPosition() - e->getWorldPosition();
+//        steeringForce += normVec(toNeighbour);
+//    }
+//
+//    return steeringForce;
+//}
+//
+//sf::Vector2f SteeringBehaviour::alignment(){
+//    sf::Vector2f averageHeading;
+//    int neighbourCount = 0;
+//
+//    std::list<Entity*> neighbours;
+//    mHost->getNeighbours(neighbours
+//                         , mHost->getEntityType());
+//
+//    //neighbours = mHost->getNeighbours();
+//
+//    for(Entity* e : neighbours)
+//    {
+//        if(e != mHost)
 //        {
-//            //const b2Fixture* fixture = (*itrScenery)->getFixtures();
-//
-//            sf::Vector2f p1(mHost->getWorldPosition());
-//            sf::Vector2f p2(mHost->getWorldTransform() * mFeelers.at(flr));
-//
-//            //b2RayCastInput input;
-//            //input.p1 = convertVec(p1);
-//            //input.p2 = convertVec(p2);
-//            //input.maxFraction = 1.f;
-//
-//            //b2RayCastOutput output;
-//
-//            //if(!fixture->RayCast(&output, input, 0))
-//            //  continue;
-//            //if(output.fraction < closestFraction)
-//            //{
-//            //  closestFraction = output.fraction;
-//            //  closestFeeler = p2;
-//            //  closestIntersection = p1 + closestFraction * (p2 - p1);
-//            //  closestNorm = convertVec(output.normal);
-//            //  intersectionOccured = true;
-//            //}
+//            averageHeading += e->getWorldTransform() * e->getHeading();
+//            neighbourCount ++;
 //        }
+//    }
 //
-//        if(intersectionOccured)
+//    if(neighbourCount > 0)
+//    {
+//        averageHeading /= static_cast<float>(neighbourCount);
+//        averageHeading -= mHost->getWorldTransform() * mHost->getHeading();
+//    }
+//
+//    return averageHeading;
+//}
+//
+//sf::Vector2f SteeringBehaviour::cohesion(){
+//    sf::Vector2f steeringForce, centerOfMass;
+//    int neighbourCount = 0;
+//
+//    std::list<Entity*> neighbours;
+//    mHost->getNeighbours(neighbours
+//                         , mHost->getEntityType());
+//
+//    //neighbours = mHost->getNeighbours();
+//
+//    for(Entity* e : neighbours)
+//    {
+//        if(e != mHost
+//           && e)
 //        {
-////          std::cout << "Intersection occured " << closestNorm.x << "," << closestNorm.y << std::endl;
-//
-//            sf::Vector2f overShoot = closestFeeler - closestIntersection;
-//            steeringForce = closestNorm * magVec(overShoot);
+//            centerOfMass += e->getWorldPosition();
+//            neighbourCount ++;
 //        }
-    }
-
-    return steeringForce;
-}
-
-sf::Vector2f SteeringBehaviour::seperation(){
-    sf::Vector2f steeringForce;
-
-    std::list<Entity*> neighbours;
-     mHost->getNeighbours(neighbours
-                          , Entity::Type::AllTypes);
-
-    //neighbours = mHost->getNeighbours();
-
-    for(Entity* e : neighbours)
-    {
-        sf::Vector2f toNeighbour = mHost->getWorldPosition() - e->getWorldPosition();
-        steeringForce += normVec(toNeighbour);
-    }
-
-    return steeringForce;
-}
-
-sf::Vector2f SteeringBehaviour::alignment(){
-    sf::Vector2f averageHeading;
-    int neighbourCount = 0;
-
-    std::list<Entity*> neighbours;
-    mHost->getNeighbours(neighbours
-                         , mHost->getEntityType());
-
-    //neighbours = mHost->getNeighbours();
-
-    for(Entity* e : neighbours)
-    {
-        if(e != mHost)
-        {
-            averageHeading += e->getWorldTransform() * e->getHeading();
-            neighbourCount ++;
-        }
-    }
-
-    if(neighbourCount > 0)
-    {
-        averageHeading /= static_cast<float>(neighbourCount);
-        averageHeading -= mHost->getWorldTransform() * mHost->getHeading();
-    }
-
-    return averageHeading;
-}
-
-sf::Vector2f SteeringBehaviour::cohesion(){
-    sf::Vector2f steeringForce, centerOfMass;
-    int neighbourCount = 0;
-
-    std::list<Entity*> neighbours;
-    mHost->getNeighbours(neighbours
-                         , mHost->getEntityType());
-
-    //neighbours = mHost->getNeighbours();
-
-    for(Entity* e : neighbours)
-    {
-        if(e != mHost
-           && e)
-        {
-            centerOfMass += e->getWorldPosition();
-            neighbourCount ++;
-        }
-    }
-
-    if(neighbourCount > 0)
-    {
-        centerOfMass /= static_cast<float>(neighbourCount);
-        steeringForce = seek(centerOfMass);
-    }
-
-    return normVec(steeringForce);
-}
-
-sf::Vector2f SteeringBehaviour::flocking(){
-    sf::Vector2f steeringForce;
-
-    steeringForce += alignment() * mAlignmentMultiplier;
-    steeringForce += cohesion() * mCohesionMultiplier;
-
-    return steeringForce;
-}
+//    }
+//
+//    if(neighbourCount > 0)
+//    {
+//        centerOfMass /= static_cast<float>(neighbourCount);
+//        steeringForce = seek(centerOfMass);
+//    }
+//
+//    return normVec(steeringForce);
+//}
+//
+//sf::Vector2f SteeringBehaviour::flocking(){
+//    sf::Vector2f steeringForce;
+//
+//    steeringForce += alignment() * mAlignmentMultiplier;
+//    steeringForce += cohesion() * mCohesionMultiplier;
+//
+//    return steeringForce;
+//}
 
 sf::Vector2f SteeringBehaviour::calculate(sf::Time dt){
   sf::Vector2f steeringForce;
@@ -471,13 +471,13 @@ sf::Vector2f SteeringBehaviour::calculate(sf::Time dt){
 //    return -steeringForce;
   }
 
-  if(mBehaviourFlags.at(SteeringBehaviour::Behaviour::WallAvoidance))
-  {
-      sf::Vector2f force = wallAvoidance() * mWallAvoidanceMultiplier;
+  //if(mBehaviourFlags.at(SteeringBehaviour::Behaviour::WallAvoidance))
+  //{
+  //    sf::Vector2f force = wallAvoidance() * mWallAvoidanceMultiplier;
 
-      if(!accumulateForce(steeringForce, force))
-          return steeringForce;
-  }
+  //    if(!accumulateForce(steeringForce, force))
+  //        return steeringForce;
+  //}
 
   if(mBehaviourFlags.at(SteeringBehaviour::Behaviour::ObstacleAvoidance))
   {
@@ -487,13 +487,13 @@ sf::Vector2f SteeringBehaviour::calculate(sf::Time dt){
       return steeringForce;
   }
 
-  if(mBehaviourFlags.at(SteeringBehaviour::Behaviour::Seperation))
-  {
-    sf::Vector2f force = seperation() * mSeperationMultiplier;
+  //if(mBehaviourFlags.at(SteeringBehaviour::Behaviour::Seperation))
+  //{
+  //  sf::Vector2f force = seperation() * mSeperationMultiplier;
 
-    if(!accumulateForce(steeringForce, force))
-        return steeringForce;
-  }
+  //  if(!accumulateForce(steeringForce, force))
+  //      return steeringForce;
+  //}
 
   if(mBehaviourFlags.at(SteeringBehaviour::Behaviour::Arrive))
   {
@@ -519,13 +519,13 @@ sf::Vector2f SteeringBehaviour::calculate(sf::Time dt){
   //      return steeringForce;
   //}
 
-  if(mBehaviourFlags.at(SteeringBehaviour::Behaviour::Flock))
-  {
-    sf::Vector2f force = flocking() * mFlockingMultiplier;
+  //if(mBehaviourFlags.at(SteeringBehaviour::Behaviour::Flock))
+  //{
+  //  sf::Vector2f force = flocking() * mFlockingMultiplier;
 
-    if(!accumulateForce(steeringForce, force))
-        return steeringForce;
-  }
+  //  if(!accumulateForce(steeringForce, force))
+  //      return steeringForce;
+  //}
 
   if(mBehaviourFlags.at(SteeringBehaviour::Behaviour::FollowPath))
   {
@@ -535,13 +535,13 @@ sf::Vector2f SteeringBehaviour::calculate(sf::Time dt){
         return steeringForce;
   }
 
-  if(mBehaviourFlags.at(SteeringBehaviour::Behaviour::Wander))
-  {
-    sf::Vector2f force = wander(dt) * mWanderMultiplier;
+  //if(mBehaviourFlags.at(SteeringBehaviour::Behaviour::Wander))
+  //{
+  //  sf::Vector2f force = wander(dt) * mWanderMultiplier;
 
-    if(!accumulateForce(steeringForce, force))
-        return steeringForce;
-  }
+  //  if(!accumulateForce(steeringForce, force))
+  //      return steeringForce;
+  //}
 
   if(mBehaviourFlags.at(SteeringBehaviour::Behaviour::Face))
   {
@@ -562,8 +562,8 @@ void SteeringBehaviour::setNewBehaviours(std::vector<SteeringBehaviour::Behaviou
         mBehaviourFlags.at(bh) = true;
 
     mBehaviourFlags.at(SteeringBehaviour::ObstacleAvoidance) = true;
-    mBehaviourFlags.at(SteeringBehaviour::WallAvoidance) = true;
-    mBehaviourFlags.at(SteeringBehaviour::Seperation) = true;
+    //mBehaviourFlags.at(SteeringBehaviour::WallAvoidance) = true;
+    //mBehaviourFlags.at(SteeringBehaviour::Seperation) = true;
 }
 
 void SteeringBehaviour::setNewBehaviours(SteeringBehaviour::Behaviour newType){
@@ -572,9 +572,9 @@ void SteeringBehaviour::setNewBehaviours(SteeringBehaviour::Behaviour newType){
 
     mBehaviourFlags.at(newType) = true;
 
-   if(mHost->getEntityType() != Entity::Type::Adventurer)
-      mBehaviourFlags.at(SteeringBehaviour::Seperation) = true;
+   //if(mHost->getEntityType() != Entity::Type::Adventurer)
+      //mBehaviourFlags.at(SteeringBehaviour::Seperation) = true;
 
-   mBehaviourFlags.at(SteeringBehaviour::WallAvoidance) = true;
+   //mBehaviourFlags.at(SteeringBehaviour::WallAvoidance) = true;
 }
 

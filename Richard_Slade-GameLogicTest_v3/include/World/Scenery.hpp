@@ -52,7 +52,7 @@ public:
 
     virtual                     ~Scenery(){};
 
-    virtual void                addToQuadTree(QuadTree* quadTree);
+    //virtual void                addToQuadTree(QuadTree* quadTree);
 
     Scenery::Type               getSceneryType() {return mSceneryType;}
 

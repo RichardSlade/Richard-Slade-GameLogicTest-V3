@@ -5,10 +5,12 @@
 //#include "World/LevelBlock.hpp"
 #include "World/QuadTree.hpp"
 //#include "World/Scenery.hpp"
+#include <World\World.hpp>
 
 Entity::Entity(//Level* level
-                QuadTree* quadTree
-               , const sf::Texture& texture
+                //QuadTree* quadTree
+               World* world
+                , const sf::Texture& texture
                , const sf::Font& font
                , sf::Vector2f startPos
                , EntityStats stats
@@ -16,8 +18,9 @@ Entity::Entity(//Level* level
                , Type type
                , float scale)
 : Killable(stats.lives)
+, mWorld(world)
 //, mLevel(level)
-, mQuadTree(quadTree)
+//, mQuadTree(quadTree)
 //, mPhysicsBody(body)
 , mMass(stats.mass)
 , mWalkMaxSpeed(stats.walkMaxSpeed)
@@ -122,59 +125,64 @@ void Entity::drawCurrent(sf::RenderTarget& target
 void Entity::ensureZeroOverlap()
 {
     std::list<Entity*> neighbours;
-    getNeighbours(neighbours,
-                  Entity::Type::AllTypes);
+    //getNeighbours(neighbours,
+    //              Entity::Type::AllTypes);
 
   //std::list<Entity*> neighbours = mLevel->getEntitiesInRange(const_cast<Entity*>(this),
   //                                                           mRadius);
 
-  sf::Vector2f pos = getWorldPosition();
-  float radius = getRadius();
+  //sf::Vector2f pos = getWorldPosition();
+  //float radius = getRadius();
 
-  for(Entity* e : neighbours)
-  {
-    if(e != this)
-    {
-      sf::Vector2f awayFromEntity = pos - e->getWorldPosition();
-      float expandedRadius = radius + e->getRadius();
-      float mag = magVec(awayFromEntity);
+  //for(Entity* e : neighbours)
+  //{
+  //  if(e != this)
+  //  {
+  //    sf::Vector2f awayFromEntity = pos - e->getWorldPosition();
+  //    float expandedRadius = radius + e->getRadius();
+  //    float mag = magVec(awayFromEntity);
 
-      if(mag < expandedRadius)
-      {
-        move(normVec(awayFromEntity));
-      }
-    }
-  }
+  //    if(mag < expandedRadius)
+  //    {
+  //      move(normVec(awayFromEntity));
+  //    }
+  //  }
+  //}
 }
 
-std::list<Entity*>& Entity::getNeighbours(std::list<Entity*>& returnList,
-                                          Entity::Type type) const
+//std::list<Entity*>& Entity::getNeighbours(std::list<Entity*>& returnList,
+//                                          Entity::Type type) const
+//{
+//    //return mLevel->getEntitiesInRange(const_cast<Entity*>(this)
+//    //                                , mRadius);
+//
+//  //return mQuadTree->retrieveEntities(returnList,
+//  //                                   this,
+//  //                                   type);
+//}
+
+//std::list<Scenery*>& Entity::getObstacles(std::list<Scenery*>& returnList,
+//                                         Scenery::Type type) const
+//{
+//  return mQuadTree->retrieveScenery(returnList,
+//                                     this,
+//                                     type);
+//}
+
+std::vector<Scenery*> Entity::getObstacles() const
 {
-    //return mLevel->getEntitiesInRange(const_cast<Entity*>(this)
-    //                                , mRadius);
-
-  return mQuadTree->retrieveEntities(returnList,
-                                     this,
-                                     type);
+  return mWorld->getObstacles(getWorldPosition());
 }
 
-std::list<Scenery*>& Entity::getObstacles(std::list<Scenery*>& returnList,
-                                         Scenery::Type type) const
-{
-  return mQuadTree->retrieveScenery(returnList,
-                                     this,
-                                     type);
-}
-
-void Entity::addToQuadTree(QuadTree* quadTree)
-{
-  // Add children
-  SceneNode::addToQuadTree(quadTree);
-
-//  std::cout << "adding entity to quad tree" << std::endl;
-
-  quadTree->insert(this);
-}
+//void Entity::addToQuadTree(QuadTree* quadTree)
+//{
+//  // Add children
+//  SceneNode::addToQuadTree(quadTree);
+//
+////  std::cout << "adding entity to quad tree" << std::endl;
+//
+//  quadTree->insert(this);
+//}
 
 //std::vector<LevelBlock*> Entity::getBlockTypeInRange(LevelBlock::Type blockType, float radius) const
 //{

@@ -17,8 +17,6 @@
 #include "Entity/Entity.hpp"
 #include "Entity/Path.hpp"
 
-class Enemy;
-
 class Adventurer : public Entity
 {
 private:
@@ -33,8 +31,9 @@ private:
 
 public:
                                     Adventurer(const sf::RenderWindow& window
-                                              , QuadTree* quadTree
+                                              //, QuadTree* quadTree
                                               //, Level* level
+                                              , World* world
                                               , const sf::Texture&
                                               , const sf::Font&
                                               , sf::Vector2f

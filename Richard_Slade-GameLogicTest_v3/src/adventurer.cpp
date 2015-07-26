@@ -12,15 +12,17 @@
 #include "App\Utility.hpp"
 
 Adventurer::Adventurer(const sf::RenderWindow& window
-                     , QuadTree* quadTree
+                     //, QuadTree* quadTree
                      //, Level* level
+                     , World* world
                      , const sf::Texture& texture
                      , const sf::Font& font
                      , sf::Vector2f startPos
                      , EntityStats stats
                      , const Params& params
                      , float scale)
-: Entity(quadTree
+: Entity(//quadTree
+          world
         , texture
          , font
          , startPos

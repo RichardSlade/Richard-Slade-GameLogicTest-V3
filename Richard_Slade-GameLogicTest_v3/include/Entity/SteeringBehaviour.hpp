@@ -34,13 +34,13 @@ public:
         Face,
         Arrive,
         Seek,
-        Evade,
-        Wander,
+        //Evade,
+        //Wander,
         FollowPath,
         ObstacleAvoidance,
-        WallAvoidance,
-        Seperation,
-        Flock,
+        //WallAvoidance,
+        //Seperation,
+        //Flock,
         NumBehaviour
     };
 
@@ -103,16 +103,16 @@ private:
     //sf::Vector2f                            evade();
     //sf::Vector2f                            flee(sf::Vector2f);
 
-    sf::Vector2f                            wander(sf::Time);
+    //sf::Vector2f                            wander(sf::Time);
     sf::Vector2f                            followPath();
 
     sf::Vector2f                            obstacleAvoidance();
-    sf::Vector2f                            wallAvoidance();
+    //sf::Vector2f                            wallAvoidance();
 
     sf::Vector2f                            seperation();
-    sf::Vector2f                            alignment();
-    sf::Vector2f                            cohesion();
-    sf::Vector2f                            flocking();
+    //sf::Vector2f                            alignment();
+    //sf::Vector2f                            cohesion();
+    //sf::Vector2f                            flocking();
 
 public:
                                             SteeringBehaviour(Entity*

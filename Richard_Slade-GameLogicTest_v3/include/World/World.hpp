@@ -26,6 +26,7 @@ class Waypoint;
 class MovingEntity;
 class GameState;
 class SpriteNode;
+class Scenery;
 //class Adventurer;
 
 class World : private sf::NonCopyable
@@ -51,9 +52,9 @@ private:
    //const int32                                  mVelocityIter;
    //const int32                                  mPositionIter;
    //const float32                                mTimeStep;
-   const int                                    mLevelBlockX;
-   const int                                    mLevelBlockY;
-   const int                                    mLevelBlockSize;
+   const unsigned int                             mLevelBlockX;
+   const unsigned int                            mLevelBlockY;
+   const unsigned int                           mLevelBlockSize;
 
    const float                                  mWaypointRadius;
    const float                                  mScrollSpeed;
@@ -66,6 +67,8 @@ private:
 //   sf::RectangleShape                           mWorldRect;
    sf::Vector2f                                 mFocusPoint;
    QuadTree::upQuadTree                         mQuadTree;
+
+   std::vector<std::vector<Scenery*>>           mObstacles;
 
    SceneNode                                    mSceneGraph;
    std::array<SceneNode*
@@ -118,7 +121,7 @@ public:
     // Getters
    const sf::FloatRect                          getViewBounds() const;
 
-
+   std::vector<Scenery*>                        getObstacles(sf::Vector2f pos);
 
     const sf::FloatRect                          getWorldBounds() const { return mWorldBounds; }
 };

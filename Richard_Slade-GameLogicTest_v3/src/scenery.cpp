@@ -34,13 +34,13 @@ Scenery::Scenery(const sf::Texture& texture,
   mRadius = radius;
 };
 
-void Scenery::addToQuadTree(QuadTree* quadTree)
-{
-  // Add children
-  SceneNode::addToQuadTree(quadTree);
-
-  quadTree->insert(this);
-}
+//void Scenery::addToQuadTree(QuadTree* quadTree)
+//{
+//  // Add children
+//  SceneNode::addToQuadTree(quadTree);
+//
+//  quadTree->insert(this);
+//}
 
 void Scenery::updateCurrent(sf::Time dt)
 {
