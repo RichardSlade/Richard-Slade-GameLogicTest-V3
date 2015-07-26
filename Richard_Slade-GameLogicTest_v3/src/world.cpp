@@ -309,7 +309,7 @@ std::vector<Scenery*> World::getObstacles(sf::Vector2f pos)
     }
   }
 
-  // REturn sorounding traps
+  // Return sorounding traps
   return obstacles;
 }
 

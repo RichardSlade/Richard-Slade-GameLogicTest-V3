@@ -1,10 +1,103 @@
-﻿Build started 26/07/2015 07:15:33.
-     1>Project "E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3.vcxproj" on node 2 (Build target(s)).
+﻿Build started 26/07/2015 09:24:44.
+     1>Project "E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3.vcxproj" on node 2 (Rebuild target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include" /I"E:\libraries\SFML-2.3.1\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt src\sceneNode.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"SFML-2.3.1\include" /Iinclude /I"E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include" /I"E:\libraries\SFML-2.3.1\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt src\adventurer.cpp src\controller.cpp src\enemy.cpp src\enemyStates.cpp src\entity.cpp src\gameState.cpp src\hud.cpp src\main.cpp src\menuState.cpp src\path.cpp src\pausedScreen.cpp src\sceneNode.cpp src\scenery.cpp src\spriteNode.cpp src\steeringBehaviour.cpp src\utility.cpp src\world.cpp
+         world.cpp
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\utility.hpp(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\entity\steeringbehaviour.hpp(16): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
+                 e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\params.hpp(12) : see declaration of 'Params'
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\gamestate.hpp(15): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
+                 e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\params.hpp(12) : see declaration of 'Params'
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\world.cpp(27): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\world.cpp(44): warning C4244: 'initializing' : conversion from 'const float' to 'const int', possible loss of data
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\world.cpp(83): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\world.cpp(85): warning C4018: '<' : signed/unsigned mismatch
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\world.cpp(91): warning C4018: '<' : signed/unsigned mismatch
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\world.cpp(115): warning C4018: '<' : signed/unsigned mismatch
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\world.cpp(121): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\world.cpp(136): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\world.cpp(154): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\world.cpp(233): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\world.cpp(234): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\world.cpp(236): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\world.cpp(248): warning C4018: '<' : signed/unsigned mismatch
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\world.cpp(250): warning C4018: '<' : signed/unsigned mismatch
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\world.cpp(296): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+         utility.cpp
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\utility.hpp(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\utility.cpp(68): warning C4244: 'return' : conversion from 'int' to 'float', possible loss of data
+         steeringBehaviour.cpp
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\utility.hpp(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\entity\steeringbehaviour.hpp(16): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
+                 e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\params.hpp(12) : see declaration of 'Params'
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\steeringbehaviour.cpp(108): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\steeringbehaviour.cpp(215): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+         spriteNode.cpp
+         scenery.cpp
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\utility.hpp(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
          sceneNode.cpp
+         pausedScreen.cpp
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\utility.hpp(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\entity\steeringbehaviour.hpp(16): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
+                 e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\params.hpp(12) : see declaration of 'Params'
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\gamestate.hpp(15): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
+                 e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\params.hpp(12) : see declaration of 'Params'
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\pausedscreen.cpp(116): warning C4244: 'initializing' : conversion from 'unsigned int' to 'float', possible loss of data
+         path.cpp
+         menuState.cpp
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\utility.hpp(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\entity\steeringbehaviour.hpp(16): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
+                 e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\params.hpp(12) : see declaration of 'Params'
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\menustate.cpp(31): warning C4244: 'initializing' : conversion from 'unsigned int' to 'float', possible loss of data
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\menustate.cpp(91): warning C4244: 'initializing' : conversion from 'unsigned int' to 'float', possible loss of data
+         main.cpp
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\main.cpp(9): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+         hud.cpp
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\utility.hpp(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\entity\steeringbehaviour.hpp(16): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
+                 e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\params.hpp(12) : see declaration of 'Params'
+         gameState.cpp
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\utility.hpp(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\entity\steeringbehaviour.hpp(16): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
+                 e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\params.hpp(12) : see declaration of 'Params'
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\gamestate.hpp(15): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
+                 e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\params.hpp(12) : see declaration of 'Params'
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\gamestate.cpp(27): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\gamestate.cpp(34): warning C4244: 'initializing' : conversion from 'const float' to 'const int', possible loss of data
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\gamestate.cpp(50): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+         entity.cpp
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\utility.hpp(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\entity\steeringbehaviour.hpp(16): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
+                 e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\params.hpp(12) : see declaration of 'Params'
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\entity.cpp(32): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+         enemyStates.cpp
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\utility.hpp(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\entity\steeringbehaviour.hpp(16): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
+                 e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\params.hpp(12) : see declaration of 'Params'
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\enemystates.cpp(96): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\enemystates.cpp(105): warning C4018: '<' : signed/unsigned mismatch
+         enemy.cpp
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\utility.hpp(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\entity\steeringbehaviour.hpp(16): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
+                 e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\params.hpp(12) : see declaration of 'Params'
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\enemy.cpp(31): warning C4244: 'initializing' : conversion from 'float' to 'const unsigned int', possible loss of data
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\enemy.cpp(59): warning C4018: '<' : signed/unsigned mismatch
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\enemy.cpp(61): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+         controller.cpp
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\utility.hpp(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\entity\steeringbehaviour.hpp(16): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
+                 e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\params.hpp(12) : see declaration of 'Params'
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\gamestate.hpp(15): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
+                 e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\params.hpp(12) : see declaration of 'Params'
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\controller.cpp(25): warning C4244: 'argument' : conversion from 'const float' to 'unsigned int', possible loss of data
+         adventurer.cpp
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\utility.hpp(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\entity\steeringbehaviour.hpp(16): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
+                 e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\include\app\params.hpp(12) : see declaration of 'Params'
+     1>e:\vs-projects\richard_slade-gamelogictest_v3\richard_slade-gamelogictest_v3\src\adventurer.cpp(97): warning C4018: '<' : signed/unsigned mismatch
+         Generating Code...
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\VS-projects\Richard_Slade-GameLogicTest_v3\Debug\Richard_Slade-GameLogicTest_v3.exe" /INCREMENTAL /NOLOGO /LIBPATH:"E:\libraries\SFML-2.3.1\lib" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\VS-projects\Richard_Slade-GameLogicTest_v3\Debug\Richard_Slade-GameLogicTest_v3.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\VS-projects\Richard_Slade-GameLogicTest_v3\Debug\Richard_Slade-GameLogicTest_v3.lib" /MACHINE:X86 Debug\adventurer.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\VS-projects\Richard_Slade-GameLogicTest_v3\Debug\Richard_Slade-GameLogicTest_v3.exe" /INCREMENTAL /NOLOGO /LIBPATH:"SFML-2.3.1\lib" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\VS-projects\Richard_Slade-GameLogicTest_v3\Debug\Richard_Slade-GameLogicTest_v3.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\VS-projects\Richard_Slade-GameLogicTest_v3\Debug\Richard_Slade-GameLogicTest_v3.lib" /MACHINE:X86 Debug\adventurer.obj
          Debug\controller.obj
          Debug\enemy.obj
          Debug\enemyStates.obj
@@ -22,8 +115,8 @@
          Debug\utility.obj
          Debug\world.obj
          Richard_Slade-GameLogicTest_v3.vcxproj -> E:\VS-projects\Richard_Slade-GameLogicTest_v3\Debug\Richard_Slade-GameLogicTest_v3.exe
-     1>Done Building Project "E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3.vcxproj" (Build target(s)).
+     1>Done Building Project "E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3.vcxproj" (Rebuild target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.17
+Time Elapsed 00:00:12.01

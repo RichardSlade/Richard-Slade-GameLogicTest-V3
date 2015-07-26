@@ -1,79 +1,7 @@
-﻿Build started 26/07/2015 08:51:50.
-     1>Project "E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3.vcxproj" on node 2 (Rebuild target(s)).
+﻿Build started 26/07/2015 08:59:57.
+     1>Project "E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"SFML-2.3.1\include" /Iinclude /Iinclude /I"SFML-2.3.1\include" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt src\adventurer.cpp src\controller.cpp src\enemy.cpp src\enemyStates.cpp src\entity.cpp src\gameState.cpp src\hud.cpp src\main.cpp src\menuState.cpp src\path.cpp src\pausedScreen.cpp src\sceneNode.cpp src\scenery.cpp src\spriteNode.cpp src\steeringBehaviour.cpp src\utility.cpp src\world.cpp
-         adventurer.cpp
-     1>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\App/Utility.hpp(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\Entity/SteeringBehaviour.hpp(16): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
-                 E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\App/Params.hpp(12) : see declaration of 'Params'
-     1>src\adventurer.cpp(97): warning C4018: '<' : signed/unsigned mismatch
-         controller.cpp
-     1>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\App/Utility.hpp(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\Entity/SteeringBehaviour.hpp(16): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
-                 E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\App/Params.hpp(12) : see declaration of 'Params'
-     1>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\App/GameState.hpp(15): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
-                 E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\App/Params.hpp(12) : see declaration of 'Params'
-     1>src\controller.cpp(25): warning C4244: 'argument' : conversion from 'const float' to 'unsigned int', possible loss of data
-         enemy.cpp
-     1>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\App/Utility.hpp(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\Entity/SteeringBehaviour.hpp(16): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
-                 E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\App/Params.hpp(12) : see declaration of 'Params'
-     1>src\enemy.cpp(31): warning C4244: 'initializing' : conversion from 'float' to 'const unsigned int', possible loss of data
-     1>src\enemy.cpp(59): warning C4018: '<' : signed/unsigned mismatch
-     1>src\enemy.cpp(61): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-         enemyStates.cpp
-     1>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\App/Utility.hpp(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\Entity/SteeringBehaviour.hpp(16): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
-                 E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\App/Params.hpp(12) : see declaration of 'Params'
-     1>src\enemyStates.cpp(96): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-     1>src\enemyStates.cpp(105): warning C4018: '<' : signed/unsigned mismatch
-         entity.cpp
-     1>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\App/Utility.hpp(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\Entity/SteeringBehaviour.hpp(16): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
-                 E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\App/Params.hpp(12) : see declaration of 'Params'
-     1>src\entity.cpp(32): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-         gameState.cpp
-     1>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\App/Utility.hpp(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\Entity/SteeringBehaviour.hpp(16): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
-                 E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\App/Params.hpp(12) : see declaration of 'Params'
-     1>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\App/GameState.hpp(15): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
-                 E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\App/Params.hpp(12) : see declaration of 'Params'
-     1>src\gameState.cpp(27): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>src\gameState.cpp(34): warning C4244: 'initializing' : conversion from 'const float' to 'const int', possible loss of data
-     1>src\gameState.cpp(50): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-         hud.cpp
-     1>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\App/Utility.hpp(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\Entity/SteeringBehaviour.hpp(16): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
-                 E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\App/Params.hpp(12) : see declaration of 'Params'
-         main.cpp
-     1>src\main.cpp(9): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
-         menuState.cpp
-     1>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\App/Utility.hpp(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\Entity/SteeringBehaviour.hpp(16): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
-                 E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\App/Params.hpp(12) : see declaration of 'Params'
-     1>src\menuState.cpp(31): warning C4244: 'initializing' : conversion from 'unsigned int' to 'float', possible loss of data
-     1>src\menuState.cpp(91): warning C4244: 'initializing' : conversion from 'unsigned int' to 'float', possible loss of data
-         path.cpp
-         pausedScreen.cpp
-     1>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\App/Utility.hpp(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\Entity/SteeringBehaviour.hpp(16): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
-                 E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\App/Params.hpp(12) : see declaration of 'Params'
-     1>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\App/GameState.hpp(15): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
-                 E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\App/Params.hpp(12) : see declaration of 'Params'
-     1>src\pausedScreen.cpp(116): warning C4244: 'initializing' : conversion from 'unsigned int' to 'float', possible loss of data
-         sceneNode.cpp
-         scenery.cpp
-     1>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\App/Utility.hpp(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-         spriteNode.cpp
-         steeringBehaviour.cpp
-     1>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\App/Utility.hpp(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\Entity/SteeringBehaviour.hpp(16): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
-                 E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\App/Params.hpp(12) : see declaration of 'Params'
-     1>src\steeringBehaviour.cpp(108): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>src\steeringBehaviour.cpp(215): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-         utility.cpp
-     1>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\App/Utility.hpp(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>src\utility.cpp(68): warning C4244: 'return' : conversion from 'int' to 'float', possible loss of data
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"SFML-2.3.1\include" /Iinclude /Iinclude /I"SFML-2.3.1\include" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt src\world.cpp
          world.cpp
      1>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\App/Utility.hpp(12): warning C4305: 'initializing' : truncation from 'double' to 'const float'
      1>E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\include\Entity/SteeringBehaviour.hpp(16): warning C4099: 'Params' : type name first seen using 'struct' now seen using 'class'
@@ -116,8 +44,8 @@
          Generating code
          Finished generating code
          Richard_Slade-GameLogicTest_v3.vcxproj -> E:\VS-projects\Richard_Slade-GameLogicTest_v3\Release\Richard_Slade-GameLogicTest_v3.exe
-     1>Done Building Project "E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3.vcxproj" (Rebuild target(s)).
+     1>Done Building Project "E:\VS-projects\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3\Richard_Slade-GameLogicTest_v3.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:11.31
+Time Elapsed 00:00:02.80
