@@ -6,4 +6,4 @@ IDE: Visual studio 2013
 
 Implemented all basic requirements
 
-With more time would have added harder difficulties, A* path finding for player, highscore and networking in that order.
+With more time would have added a trap and enemy editor, A* path finding for player, highscore, networking and harder difficulties in that order.
